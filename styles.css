@@ -407,7 +407,7 @@ h6 {
 .carousel-track {
     display: flex;
     gap: 20px;
-    animation: scroll-carousel 30s linear infinite;
+    animation: scroll-carousel 40s linear infinite;
     will-change: transform;
 }
 
@@ -1418,17 +1418,13 @@ h6 {
         min-height: 25vh;
     }
 
-    .carousel-track {
-        animation-duration: 10s;
-    }
-
     .marquee span {
         font-size: 8vh;
         letter-spacing: 2px;
     }
 
     .carousel-track {
-        animation-duration: 6.7s;
+        animation-duration: 13.3s;
     }
 
     .hero-section {

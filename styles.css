@@ -1,0 +1,1706 @@
+/* ============================================
+   ОБЩИЕ СТИЛИ И СБРОС
+   ============================================ */
+
+/* Подключение локального шрифта Impact */
+@font-face {
+    font-family: 'Impact';
+    src: url('fonts/impact.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Подключение локального шрифта Cormorant */
+@font-face {
+    font-family: 'Cormorant';
+    src: url('fonts/Cormorant-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('fonts/Cormorant-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('fonts/Cormorant-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('fonts/Cormorant-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 38px;
+    /* Отступ для фиксированной навигации */
+}
+
+body {
+    font-family: 'Cormorant', serif;
+    overflow-x: hidden;
+    width: 100%;
+    padding-top: 38px;
+    /* 1 см - отступ для навигации */
+}
+
+/* Заголовки используют Impact */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   НАВИГАЦИОННАЯ ПАНЕЛЬ
+   ============================================ */
+
+.top-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    /* 1 см */
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #b30000;
+}
+
+.nav-ornament {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+    mix-blend-mode: multiply;
+    /* Убирает белый фон изображения */
+}
+
+.nav-ornament-left {
+    margin-left: 20px;
+    transform: scaleX(-1);
+    /* Зеркально отражаем левый вензель */
+}
+
+.nav-ornament-right {
+    margin-right: 20px;
+}
+
+.nav-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #000000;
+    text-decoration: none;
+    padding: 0 15px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-right: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn:first-child {
+    border-left: 1px solid #e0e0e0;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #b30000;
+    transition: width 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #fff5f5;
+    color: #b30000;
+    transform: translateY(-1px);
+}
+
+.nav-btn:hover::before {
+    width: 100%;
+}
+
+.nav-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   БЛОК 1: ГЛАВНЫЙ ЭКРАН
+   ============================================ */
+.block-1 {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Белая полоска с текстом (15% от блока) */
+.top-bar {
+    height: 15vh;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.top-bar p {
+    color: #000000;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 2px;
+    font-family: 'Impact', Arial, sans-serif;
+}
+
+/* Бегущая строка (25% от блока) */
+.marquee-container {
+    height: 25vh;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.marquee {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 40s linear infinite;
+}
+
+.marquee span {
+    color: #b30000;
+    font-size: 12.5vh;
+    font-weight: 400;
+    letter-spacing: 8px;
+    padding-right: 50px;
+    font-family: 'Impact', Arial, sans-serif;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Героический раздел с фоном (60% от блока) */
+.hero-section {
+    height: 60vh;
+    background-image: url('images/block_1.jpeg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 5%;
+    position: relative;
+}
+
+/* Красная кнопка */
+.cta-button {
+    background-color: #b30000;
+    color: #000000;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+    font-family: 'Impact', Arial, sans-serif;
+    padding: 30px 60px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+}
+
+.cta-button:hover {
+    background-color: #8b0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   РАЗДЕЛИТЕЛЬ МЕЖДУ БЛОКАМИ
+   ============================================ */
+.block-separator {
+    width: 100%;
+    height: 20px;
+    /* Replaced 0.5cm */
+    background: linear-gradient(90deg,
+            #000000 0%,
+            #b30000 25%,
+            #b30000 75%,
+            #000000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.block-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   БЛОК 2: КТО МЫ ТАКИЕ
+   ============================================ */
+.block-2 {
+    height: 100vh;
+    width: 100%;
+    background-image: url('images/block_2.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 5% 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.block-2-title {
+    font-family: 'Impact', Arial, sans-serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #000000;
+    text-align: left;
+    margin: 0;
+    line-height: 1.4;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+    max-width: 1200px;
+    width: 100%;
+    display: block;
+    padding-left: 450px;
+    letter-spacing: 2px;
+    /* Replaced 12cm */
+}
+
+.block-2-text-container {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 50vw;
+    max-height: 50vh;
+    overflow-y: auto;
+    position: absolute;
+    bottom: calc(5% + 17px);
+    /* Replaced 1cm */
+    right: 58px;
+    /* Replaced 0.5cm */
+}
+
+.block-2-subtitle-text {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+    color: #666666;
+    line-height: 1.6;
+    text-align: left;
+    margin: 0 0 25px 0;
+    font-style: italic;
+}
+
+.block-2-text {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.1rem, 1.4vw, 1.1rem);
+    color: #333333;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 0 0 20px 0;
+}
+
+.block-2-text:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   БЛОК 3: КАРУСЕЛЬ И ЭТАПЫ РАБОТЫ
+   ============================================ */
+.block-3 {
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Карусель */
+.carousel-container {
+    height: 45vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 52px;
+    /* Replaced 1.8cm */
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll-carousel 60s linear infinite;
+    will-change: transform;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.carousel-image {
+    height: 34.2vh;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+/* Текстовый блок */
+.block-3-text-section {
+    min-height: 14vh;
+    /* Changed from fixed height */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 5%;
+    text-align: center;
+}
+
+.block-3-title {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #000000;
+    margin: 0 0 18px 0;
+    line-height: 1.3;
+    letter-spacing: 1px;
+}
+
+.block-3-subtitle {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #333333;
+    margin: 0 0 27px 0;
+    line-height: 1.6;
+}
+
+.block-3-workflow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1400px;
+}
+
+.workflow-step {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(0.7rem, 1.2vw, 0.95rem);
+    font-weight: bold;
+    color: #000000;
+    background-color: #f5f5f5;
+    padding: 8px 15px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.workflow-arrow {
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    color: #b30000;
+    font-weight: bold;
+}
+
+/* Нижнее изображение */
+.block-3-bottom-image {
+    height: 38vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.block-3-bottom-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    cursor: default;
+}
+
+.modal-close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: #ffffff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10000;
+}
+
+.modal-close:hover {
+    color: #b30000;
+}
+
+/* ============================================
+   БЛОК 4: ФОРМА ОБРАТНОЙ СВЯЗИ
+   ============================================ */
+.block-4 {
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.block-4-top-image {
+    height: 25vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.block-4-top-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block-4-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 5%;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-intro-text {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: #333333;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.main-form {
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    font-family: 'Cormorant', serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.form-field input {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Cormorant', serif;
+    transition: all 0.3s ease;
+}
+
+.form-field input:focus {
+    outline: none;
+    border-color: #b30000;
+    box-shadow: 0 0 10px rgba(179, 0, 0, 0.2);
+}
+
+.phone-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.flag-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.phone-input-wrapper input {
+    padding-left: 45px;
+}
+
+.date-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.budget-section {
+    margin: 30px 0;
+}
+
+.budget-question {
+    font-family: 'Impact', Arial, sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: normal;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.budget-info {
+    font-family: 'Cormorant', serif;
+    font-size: 1.1rem;
+    color: #666666;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.consent-wrapper {
+    margin: 30px 0;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.consent-label input[type="checkbox"] {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 12px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.consent-text {
+    font-family: 'Cormorant', serif;
+    font-size: 0.85rem;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.privacy-link {
+    color: #b30000;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.privacy-link:hover {
+    color: #8b0000;
+}
+
+.submit-cta-button {
+    width: 100%;
+    background-color: #b30000;
+    color: #000000;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 400;
+    font-family: 'Impact', Arial, sans-serif;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.submit-cta-button:hover {
+    background-color: #8b0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+.submit-cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.submit-cta-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   БЛОК 5 - ГАЛЕРЕЯ ПРОЕКТОВ
+   ============================================ */
+.block-5 {
+    background-color: #ffffff;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.block-5-title {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 3.6rem;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    padding-top: 45px;
+    /* Replaced 1.2cm */
+    padding-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+/* Marquee with stacked text */
+.block-5-marquee-container {
+    background-color: #ffffff;
+    overflow: hidden;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.block-5-marquee {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-marquee-5 30s linear infinite;
+    will-change: transform;
+    gap: 80px;
+}
+
+.block-5-marquee:hover {
+    animation-play-state: paused;
+}
+
+.block-5-marquee-text {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #b30000;
+    margin-right: 80px;
+    /* Увеличили отступ между блоками текста */
+    text-align: center;
+    display: inline-block;
+}
+
+@keyframes scroll-marquee-5 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 75px;
+    row-gap: 25px;
+    padding: 0 40px 50px 40px;
+    max-width: 1150px;
+    margin: 0 auto;
+    flex-grow: 1;
+    align-content: center;
+}
+
+.project-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.project-item:hover {
+    transform: translateY(-10px);
+}
+
+.project-item:hover .project-cover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.project-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-caption {
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #000000;
+    margin-top: 12px;
+    letter-spacing: 1px;
+}
+
+/* Gallery Modal */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+.gallery-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.gallery-close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-size: 50px;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 2001;
+    transition: color 0.3s ease;
+}
+
+.gallery-close:hover {
+    color: #b30000;
+}
+
+.gallery-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+}
+
+#gallery-image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-nav {
+    background-color: rgba(179, 0, 0, 0.8);
+    color: #ffffff;
+    border: none;
+    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2002;
+}
+
+.gallery-nav:hover {
+    background-color: rgba(179, 0, 0, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-prev {
+    left: -80px;
+}
+
+.gallery-next {
+    right: -80px;
+}
+
+.gallery-counter {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-family: 'Cormorant', serif;
+}
+
+/* ============================================
+   БЛОК 6 - ПАКЕТНЫЕ ПРЕДЛОЖЕНИЯ
+   ============================================ */
+.block-6 {
+    background-color: #ffffff;
+    padding: 0 0 40px 0;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.block-6-title {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 3.6rem;
+    text-align: center;
+    color: #000000;
+    margin: 76px 0 40px;
+    letter-spacing: 2px;
+}
+
+/* Packages Grid */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 50px;
+    row-gap: 25px;
+    padding: 0 40px 50px 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+    flex-grow: 1;
+    align-content: center;
+}
+
+.package-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.package-item:hover {
+    transform: translateY(-10px);
+}
+
+.package-item:hover .package-cover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.package-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.package-cta {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #b30000;
+    margin-top: 12px;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.package-item:hover .package-cta {
+    color: #8b0000;
+}
+
+/* Instagram Section */
+.instagram-section {
+    max-width: 1000px;
+    margin: -75px auto 0;
+    /* Replaced -2cm */
+    padding: 40px 40px 50px;
+    text-align: center;
+}
+
+.instagram-title {
+    font-size: 2.5rem;
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.instagram-subtitle {
+    font-family: 'Cormorant', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #b30000;
+    margin: 0 0 30px 0;
+    letter-spacing: 3px;
+}
+
+.instagram-embed {
+    margin: 30px 0;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-placeholder {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    padding: 40px;
+    border-radius: 15px;
+    color: #ffffff;
+}
+
+.instagram-placeholder p {
+    font-family: 'Cormorant', serif;
+    font-size: 1.5rem;
+    margin: 0 0 15px 0;
+}
+
+.instagram-link {
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.instagram-link:hover {
+    opacity: 0.8;
+}
+
+.instagram-disclaimer {
+    font-family: 'Cormorant', serif;
+    font-size: 0.85rem;
+    color: #666666;
+    margin-top: 30px;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* ============================================
+   COOKIE CONSENT BANNER
+   ============================================ */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: 20px;
+    z-index: 10000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease;
+    display: none;
+}
+
+.cookie-banner.show {
+    display: block;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.cookie-text {
+    font-family: 'Cormorant', serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+    min-width: 300px;
+}
+
+.cookie-link {
+    color: #b30000;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.cookie-link:hover {
+    color: #8b0000;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.cookie-accept {
+    background-color: #b30000;
+    color: #ffffff;
+}
+
+.cookie-accept:hover {
+    background-color: #8b0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(179, 0, 0, 0.4);
+}
+
+.cookie-decline {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.cookie-decline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   СТАРЫЕ СТИЛИ ФОРМЫ (удалены)
+   ============================================ */
+.contact-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-container h2 {
+    color: #000000;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Cormorant', serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #ff0000;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.submit-button:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ: ПЛАНШЕТЫ
+   ============================================ */
+@media screen and (max-width: 1024px) {
+    .top-bar p {
+        font-size: clamp(1rem, 3vw, 2rem);
+        letter-spacing: 1px;
+    }
+
+    .marquee span {
+        font-size: 10vh;
+    }
+
+    .cta-button {
+        padding: 27px 52px;
+        font-size: clamp(1.35rem, 3vw, 1.95rem);
+    }
+
+    .form-container {
+        padding: 30px;
+    }
+
+    /* Блок 2 на планшетах */
+    .block-2 {
+        padding: 50px 4% 60px;
+    }
+
+    .block-2-title {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        padding-left: 50px;
+        /* Reduced padding for tablets */
+    }
+
+    .block-2-text-container {
+        padding: 30px;
+        width: 55vw;
+        max-height: 45vh;
+        bottom: 4%;
+        right: 0;
+    }
+
+    .block-2-subtitle-text {
+        font-size: clamp(0.95rem, 2vw, 1.2rem);
+        margin-bottom: 20px;
+    }
+
+    /* 2 columns for tablets */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        padding: 0 30px 50px;
+    }
+
+    .packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        padding: 0 30px 50px;
+    }
+
+    /* Hide 3rd item in row or wrap gracefully? Grid auto-flow handles it, but 2 col means even rows */
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ: МОБИЛЬНЫЕ УСТРОЙСТВА
+   ============================================ */
+@media screen and (max-width: 768px) {
+
+    /* Адаптация навигационной панели для мобильных */
+    .top-navigation {
+        height: 32px;
+        padding: 0 5px;
+    }
+
+    .nav-ornament {
+        height: 80%;
+        padding: 3px 0;
+    }
+
+    .nav-ornament-left {
+        margin-left: 5px;
+    }
+
+    .nav-ornament-right {
+        margin-right: 5px;
+    }
+
+    .nav-btn {
+        font-size: 0.5rem;
+        padding: 0 8px;
+        letter-spacing: 0.3px;
+    }
+
+    body {
+        padding-top: 32px;
+    }
+
+    html {
+        scroll-padding-top: 32px;
+    }
+
+    /* Block Reset for Mobile */
+    .block-1,
+    .block-2,
+    .block-3,
+    .block-4,
+    .block-5,
+    .block-6 {
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
+    }
+
+    .block-1 {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .top-bar {
+        height: auto;
+        min-height: 15vh;
+        padding: 20px 15px;
+    }
+
+    .top-bar p {
+        font-size: clamp(0.9rem, 4vw, 1.5rem);
+        letter-spacing: 1px;
+    }
+
+    .marquee-container {
+        height: auto;
+        min-height: 25vh;
+    }
+
+    .marquee span {
+        font-size: 8vh;
+        letter-spacing: 2px;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 60vh;
+        padding: 40px 5%;
+        align-items: flex-end;
+        padding-bottom: 60px;
+    }
+
+    .cta-button {
+        width: 90%;
+        max-width: 450px;
+        padding: 24px 45px;
+        font-size: clamp(1.35rem, 4vw, 1.8rem);
+        border-radius: 12px;
+    }
+
+    .form-container {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .form-container h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin-bottom: 25px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .submit-button {
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+    /* Блок 2 на мобильных */
+    .block-2 {
+        padding: 40px 5%;
+        justify-content: flex-start;
+    }
+
+    .block-2-title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        text-align: center;
+        margin-bottom: 40px;
+        padding-left: 0;
+        letter-spacing: normal;
+        /* Reset padding strictly */
+    }
+
+    .block-2-text-container {
+        padding: 20px;
+        width: 90vw;
+        max-height: none;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin: 0 auto;
+    }
+
+    .block-2-subtitle-text {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        margin-bottom: 15px;
+    }
+
+    .block-2-text {
+        text-align: left;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+    }
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ: МАЛЕНЬКИЕ МОБИЛЬНЫЕ
+   ============================================ */
+@media screen and (max-width: 480px) {
+    .top-bar p {
+        font-size: clamp(0.8rem, 4.5vw, 1.2rem);
+        letter-spacing: 0.5px;
+    }
+
+    /* Adjust padding for taller mobile nav */
+    html {
+        scroll-padding-top: 50px;
+    }
+
+    body {
+        padding-top: 50px;
+    }
+
+    .marquee span {
+        font-size: 7vh;
+        letter-spacing: 1px;
+    }
+
+    .hero-section {
+        padding: 30px 5%;
+        padding-bottom: 50px;
+    }
+
+    .cta-button {
+        width: 100%;
+        padding: 21px 37px;
+        font-size: 1.5rem;
+    }
+
+    /* Navigation Mobile */
+    .top-navigation {
+        height: 50px;
+        /* Increased height for touch */
+        justify-content: center;
+        /* Remove overflow from parent to allow child to control scroll */
+    }
+
+    .nav-ornament {
+        display: none;
+    }
+
+    .nav-buttons-container {
+        width: 100%;
+        display: flex;
+        /* Ensure it is flex */
+        justify-content: flex-start;
+        padding: 0 10px;
+        overflow-x: auto;
+        /* Move scroll here */
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scroll iOS */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+
+    .nav-buttons-container::-webkit-scrollbar {
+        display: none; /* Chrome/Safari - скрываем полоску прокрутки */
+    }
+
+    .nav-btn {
+        flex-shrink: 0;
+        padding: 0 15px;
+        font-size: 0.85rem;
+        border: none;
+        /* Remove borders for cleaner scroll look */
+        white-space: nowrap;
+    }
+
+    .nav-btn:first-child {
+        border-left: none;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .block-5-title {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        margin-top: 3rem;
+    }
+
+    .block-5-marquee span {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px 5%;
+        flex-grow: 1;
+    }
+
+    .project-caption {
+        font-size: 1.2rem;
+    }
+
+    .block-6-title {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        padding-top: 3rem;
+        padding-bottom: 40px;
+    }
+
+    .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 30px 5% 60px;
+        flex-grow: 1;
+    }
+
+    .package-cta {
+        font-size: 1.1rem;
+    }
+
+    .instagram-section {
+        padding: 40px 20px;
+    }
+
+    .instagram-title {
+        font-size: 2rem;
+    }
+
+    .instagram-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .instagram-placeholder {
+        padding: 40px 20px;
+    }
+
+    .instagram-placeholder p {
+        font-size: 1.2rem;
+    }
+
+    .instagram-link {
+        font-size: 1.4rem;
+    }
+}
+
+.cookie-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.cookie-text {
+    font-size: 0.9rem;
+    min-width: auto;
+}
+
+.cookie-buttons {
+    width: 100%;
+    flex-direction: column;
+}
+
+.cookie-btn {
+    width: 100%;
+    padding: 14px 20px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 3px solid #b30000;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-brand {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #b30000;
+    letter-spacing: 2px;
+    margin: 0 0 15px 0;
+}
+
+.footer-credits {
+    font-family: 'Cormorant', serif;
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer-link {
+    color: #b30000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    border-bottom-color: #b30000;
+}

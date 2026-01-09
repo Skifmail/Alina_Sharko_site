@@ -1,0 +1,20 @@
+# Разрешаем индексацию всем поисковым роботам
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных файлов
+Disallow: /privacy-policy.html
+
+# Указываем путь к карте сайта
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Специальные правила для Яндекса
+User-agent: Yandex
+Allow: /
+
+# Специальные правила для Google
+User-agent: Googlebot
+Allow: /
+
+# Задержка между запросами (в секундах)
+Crawl-delay: 1

@@ -5,16 +5,18 @@
 /* Подключение локального шрифта Impact */
 @font-face {
     font-family: 'Impact';
-    src: url('fonts/impact.ttf') format('truetype');
+    src: url('./fonts/impact.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
-/* Подключение локального шрифта Cormorant */
+/* Подключение шрифта Cormorant из Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&display=swap');
+
 @font-face {
     font-family: 'Cormorant';
-    src: url('fonts/Cormorant-Regular.ttf') format('truetype');
+    src: url('./fonts/Cormorant-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -22,7 +24,7 @@
 
 @font-face {
     font-family: 'Cormorant';
-    src: url('fonts/Cormorant-Medium.ttf') format('truetype');
+    src: url('./fonts/Cormorant-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -30,7 +32,7 @@
 
 @font-face {
     font-family: 'Cormorant';
-    src: url('fonts/Cormorant-SemiBold.ttf') format('truetype');
+    src: url('./fonts/Cormorant-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -38,7 +40,7 @@
 
 @font-face {
     font-family: 'Cormorant';
-    src: url('fonts/Cormorant-Bold.ttf') format('truetype');
+    src: url('./fonts/Cormorant-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

@@ -409,6 +409,7 @@ h6 {
     gap: 20px;
     animation: scroll-carousel 40s linear infinite;
     will-change: transform;
+    width: max-content;
 }
 
 .carousel-track:hover {
@@ -432,6 +433,7 @@ h6 {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
 }
 
 .carousel-image:hover {
@@ -1426,11 +1428,13 @@ h6 {
     .carousel-track {
         animation-duration: 20s;
         gap: 15px;
+        width: max-content;
     }
 
     .carousel-image {
-        height: 28vh;
-        min-width: 40vw;
+        height: 30vh;
+        width: auto;
+        flex-shrink: 0;
     }
 
     .hero-section {

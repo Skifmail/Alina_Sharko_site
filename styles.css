@@ -1444,6 +1444,11 @@ h6 {
         border-radius: 15px;
     }
 
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
     .form-container h2 {
         font-size: clamp(1.5rem, 5vw, 2rem);
         margin-bottom: 25px;
@@ -1552,12 +1557,15 @@ h6 {
         /* Move scroll here */
         -webkit-overflow-scrolling: touch;
         /* Smooth scroll iOS */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
     }
 
     .nav-buttons-container::-webkit-scrollbar {
-        display: none; /* Chrome/Safari - скрываем полоску прокрутки */
+        display: none;
+        /* Chrome/Safari - скрываем полоску прокрутки */
     }
 
     .nav-btn {

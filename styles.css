@@ -407,7 +407,7 @@ h6 {
 .carousel-track {
     display: flex;
     gap: 20px;
-    animation: scroll-carousel 40s linear infinite;
+    animation: scroll-carousel 30s linear infinite;
     will-change: transform;
 }
 
@@ -1419,7 +1419,7 @@ h6 {
     }
 
     .carousel-track {
-        animation-duration: 20s;
+        animation-duration: 10s;
     }
 
     .marquee span {

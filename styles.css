@@ -1424,7 +1424,13 @@ h6 {
     }
 
     .carousel-track {
-        animation-duration: 50s;
+        animation-duration: 20s;
+        gap: 15px;
+    }
+
+    .carousel-image {
+        height: 28vh;
+        min-width: 40vw;
     }
 
     .hero-section {

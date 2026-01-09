@@ -1645,6 +1645,27 @@ h6 {
     .instagram-link {
         font-size: 1.4rem;
     }
+
+    /* Gallery Mobile Navigation */
+    .gallery-nav,
+    .package-gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        background-color: rgba(179, 0, 0, 0.6);
+        z-index: 2005;
+        /* Ensure above image */
+    }
+
+    .gallery-prev,
+    .package-gallery-prev {
+        left: 10px;
+    }
+
+    .gallery-next,
+    .package-gallery-next {
+        right: 10px;
+    }
 }
 
 .cookie-content {

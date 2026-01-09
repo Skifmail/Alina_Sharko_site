@@ -557,3 +557,46 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// ============================================
+// SWIPE SUPPORT FOR GALLERIES
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    function addSwipeSupport(modalId, nextBtnClass, prevBtnClass) {
+        const modal = document.getElementById(modalId);
+        const nextBtn = document.querySelector(`.${nextBtnClass}`);
+        const prevBtn = document.querySelector(`.${prevBtnClass}`);
+        
+        if (!modal || !nextBtn || !prevBtn) return;
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        modal.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        modal.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance for swipe
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe Left -> Next Image
+                nextBtn.click();
+            }
+            
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe Right -> Previous Image
+                prevBtn.click();
+            }
+        }
+    }
+
+    // Add swipe to both galleries
+    addSwipeSupport('project-gallery-modal', 'gallery-next', 'gallery-prev');
+    addSwipeSupport('package-gallery-modal', 'package-gallery-next', 'package-gallery-prev');
+});

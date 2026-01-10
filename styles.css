@@ -374,7 +374,7 @@ h6 {
 .block-2-text {
     font-family: 'Cormorant', serif;
     font-size: clamp(1.1rem, 1.4vw, 1.1rem);
-    color: #333333;
+    color: #000000;
     line-height: 1.8;
     text-align: justify;
     margin: 0 0 20px 0;

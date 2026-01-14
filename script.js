@@ -1,3 +1,50 @@
+// ============================================
+// TELEGRAM BOT CONFIGURATION
+// ============================================
+const TELEGRAM_BOT_TOKEN = '8525374282:AAFhP5OD9vnO3nuzLPYgu9PfIST5w6tYhFo'; // от @BotFather
+const TELEGRAM_CHAT_ID = '538756743'; // ваш ID из @userinfobot
+
+// Функция отправки сообщения в Telegram
+async function sendToTelegram(formData) {
+    if (TELEGRAM_BOT_TOKEN === 'ЗАМЕНИТЕ_НА_ВАШ_ТОКЕН' || TELEGRAM_CHAT_ID === 'ЗАМЕНИТЕ_НА_ВАШ_CHAT_ID') {
+        console.warn('Telegram не настроен. Заполните BOT_TOKEN и CHAT_ID в script.js');
+        return;
+    }
+
+    const commentSection = formData.comments ? `<b>💬 Комментарий:</b>\n${formData.comments}\n\n` : '';
+    const message = `
+<b>📋 Новая заявка с сайта alina-sharko.ru</b>
+
+<b>📱 Телефон:</b> ${formData.phone}
+<b>📅 Дата мероприятия:</b> ${formData.eventDate}
+<b>📧 Email:</b> ${formData.email}
+<b>💰 Бюджет:</b> ${formData.budget.toLocaleString('ru-RU')} ₽
+${commentSection}
+    `;
+    
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+        
+        if (response.ok) {
+            console.log('✅ Сообщение отправлено в Telegram');
+        } else {
+            console.error('❌ Ошибка при отправке в Telegram:', response.statusText);
+        }
+    } catch (error) {
+        console.error('❌ Ошибка сети при отправке в Telegram:', error);
+    }
+}
+
 // Плавная прокрутка к форме обратной связи
 function scrollToForm() {
     const form = document.getElementById('block-4');
@@ -220,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('eventDate');
     const emailInput = document.getElementById('email');
     const budgetInput = document.getElementById('budget');
+    const commentsInput = document.getElementById('comments');
     const consentCheckbox = document.getElementById('consent');
     const submitButton = document.querySelector('.submit-cta-button');
     const calendarIcon = document.querySelector('.calendar-icon');
@@ -370,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Проверка согласия перед отправкой
     if (mainForm) {
-        mainForm.addEventListener('submit', function(e) {
+        mainForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             if (!consentCheckbox.checked) {
@@ -390,10 +438,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 phone: phoneInput.value,
                 eventDate: dateInput.value,
                 email: emailInput.value,
-                budget: budgetValue
+                budget: budgetValue,
+                comments: commentsInput.value
             };
 
             console.log('Данные формы:', formData);
+            
+            // Отправка в Telegram
+            await sendToTelegram(formData);
+            
             alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
             
             // Очистка формы

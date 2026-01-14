@@ -48,6 +48,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+
     
     <!-- Яндекс.Метрика -->
     <script type="text/javascript">
@@ -108,6 +109,9 @@
     </script>
 </head>
 <body>
+    <!-- Область для появления навигации при наведении в самый верх -->
+    <div class="nav-reveal-zone"></div>
+
     <!-- Навигационная панель -->
     <nav class="top-navigation">
         <img src="images/venzel.png" alt="" class="nav-ornament nav-ornament-left">
@@ -117,7 +121,6 @@
             <a href="#block-3" class="nav-btn">КАК МЫ РАБОТАЕМ</a>
             <a href="#block-4" class="nav-btn">ОСТАВИТЬ ЗАЯВКУ</a>
             <a href="#block-5" class="nav-btn">НАШИ ПРОЕКТЫ</a>
-            <a href="#block-6" class="nav-btn">ПАКЕТНЫЕ ПРЕДЛОЖЕНИЯ</a>
         </div>
         <img src="images/venzel.png" alt="" class="nav-ornament nav-ornament-right">
     </nav>
@@ -129,10 +132,15 @@
             <p>ДЕКОР СО СТИЛЕМ И ЕБАНЦОЙ...</p>
         </div>
         
-        <!-- Бегущая строка (25%) -->
-        <div class="marquee-container">
-            <div class="marquee">
-                <span>ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!! ОСТОРОЖНО ДЕТАЛИ!!!</span>
+        <!-- Бегущая строка LED (25%) -->
+        <div class="led-board">
+            <div class="led-track">
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
             </div>
         </div>
         
@@ -147,32 +155,49 @@
 
     <!-- Блок 2: Будет добавлен позже -->
     <section id="block-2" class="block-2">
-        <h2 class="block-2-title">
-            КТО МЫ ТАКИЕ?<br>
-            ЗАЧЕМ МЫ ЗДЕСЬ?<br>
-            КУДА МЫ ИДЁМ?
-        </h2>
-        <div class="block-2-text-container">
-            <p class="block-2-subtitle-text">
-                Три главных экзистенциальных<br>вопроса, ответы на которые есть смысл и миссия.
-            </p>
-            <p class="block-2-text">
-                Мы – художники, превращающие пространство в эмоции.
-                Мы слушаем истории людей – о любви, о чувствах, о желаниях и 
-                переводим их на язык фактур, цвета и света и ароматов. Мы здесь,
-                чтобы делать невидимое – осязаемым и дарим людям 
-                остановленные мгновения
-            </p>
-            <p class="block-2-text">
-                Мы стремимся к созданию новой парадигмы в декоре, где нет 
-                места однообразности, а есть место искусству, мы хотим создавать
-                не просто декор, а узнаваемые арт-объекты и фантазийные миры
-            </p>
-            <p class="block-2-text">
-                А если на простом смертном, то: опыт работы 11 лет, работаем с 
-                бюджетами от 300 т.р., собственное производство, постоянная 
-                развивающаяся команда и отменное чувство юмора
-            </p>
+        <div class="block-2-content-wrapper">
+            <div class="block-2-left-image">
+                <img src="images/Block_2_left.jpg" alt="Студия декора">
+            </div>
+            
+            <div class="block-2-right-content">
+                <div class="block-2-right-image">
+                    <img src="images/Block_2_right.JPG" alt="Процесс работы">
+                </div>
+                
+                <div class="block-2-text-container">
+                    <h2 class="block-2-title">
+                        КТО МЫ ТАКИЕ?<br>
+                        ЗАЧЕМ МЫ ЗДЕСЬ?<br>
+                        КУДА МЫ ИДЁМ?
+                    </h2>
+                    
+                    <p class="block-2-subtitle-text">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        Три главных экзистенциальных вопроса, ответы на которые есть смысл и миссия.
+                    </p>
+                    <p class="block-2-text">
+                        Мы – художники, превращающие пространство в эмоции.
+                        Мы слушаем истории людей – о любви, о чувствах, о желаниях и 
+                        переводим их на язык фактур, цвета и света и ароматов. Мы здесь,
+                        чтобы делать невидимое – осязаемым и дарим людям 
+                        остановленные мгновения
+                    </p>
+                    <p class="block-2-text">
+                        Мы стремимся к созданию новой парадигмы в декоре, где нет 
+                        места однообразности, а есть место искусству, мы хотим создавать
+                        не просто декор, а узнаваемые арт-объекты и фантазийные миры
+                    </p>
+                    <p class="block-2-text">
+                        А если на простом смертном, то: опыт работы 11 лет, работаем с 
+                        бюджетами от 300 т.р., собственное производство, постоянная 
+                        развивающаяся команда и отменное чувство юмора
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -232,8 +257,13 @@
         </div>
 
         <!-- Нижнее изображение -->
-        <div class="block-3-bottom-image">
-            <img src="images/block_3.jpeg" alt="Работы студии">
+        <div class="block-3-bottom-images">
+            <div class="block-3-bottom-image">
+                <img src="images/block_3.jpeg" alt="Работы студии">
+            </div>
+            <div class="block-3-bottom-image">
+                <img src="images/block_3_1.JPG" alt="Работы студии 2">
+            </div>
         </div>
     </section>
 
@@ -252,6 +282,9 @@
         <div class="block-4-top-image">
             <img src="images/block_4.jpeg" alt="Декор студии">
         </div>
+
+        <!-- Заголовок блока -->
+        <h2 class="block-4-title">ОСТАВИТЬ ЗАЯВКУ</h2>
 
         <!-- Форма обратной связи -->
         <div class="block-4-form-container">
@@ -316,34 +349,34 @@
         <div class="block-5-marquee-container">
             <div class="block-5-marquee">
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
                 <span class="block-5-marquee-text">
-                    ОСТОРОЖНО!!!<br>ДЕТАЛИ!!!
+                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
                 </span>
             </div>
         </div>
@@ -380,42 +413,20 @@
     <!-- Separator -->
     <div class="block-separator"></div>
 
-    <!-- Block 6 - Package Offers -->
+    <!-- Block 6 - Instagram Section -->
     <section id="block-6" class="block-6">
-        <h2 class="block-6-title">ПАКЕТНЫЕ ПРЕДЛОЖЕНИЯ</h2>
-        
-        <div class="packages-grid">
-            <div class="package-item" data-package="1">
-                <img src="images/package_offers/package_1.jpeg" alt="Пакет 1" class="package-cover">
-                <p class="package-cta">ЗАКАЗАТЬ ПРЯМО СЕЙЧАС</p>
-            </div>
-            <div class="package-item" data-package="2">
-                <img src="images/package_offers/package_2.jpeg" alt="Пакет 2" class="package-cover">
-                <p class="package-cta">ЗАКАЗАТЬ ПРЯМО СЕЙЧАС</p>
-            </div>
-            <div class="package-item" data-package="3">
-                <img src="images/package_offers/package_3.jpeg" alt="Пакет 3" class="package-cover">
-                <p class="package-cta">ЗАКАЗАТЬ ПРЯМО СЕЙЧАС</p>
-            </div>
+        <h3 class="instagram-title">Мы в INSTAGRAM*</h3>
+        <p class="instagram-subtitle">ЕЖЕДНЕВНЫЙ ЗАРЯД ВДОХНОВЕНИЯ</p>
+
+        <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+        <div class="instagram-embed-wrap">
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-bd39b4e0-da51-4ff9-bed6-e0cad7a4d7e0" data-elfsight-app-lazy></div>
         </div>
 
-        <!-- Instagram Section -->
-        <div class="instagram-section">
-            <h3 class="instagram-title">Мы в INSTAGRAM*</h3>
-            <p class="instagram-subtitle">ЕЖЕДНЕВНЫЙ ЗАРЯД ВДОХНОВЕНИЯ</p>
-            
-            <div class="instagram-embed">
-                <!-- Место для встраивания Instagram контента -->
-                <div class="instagram-placeholder">
-                    <p>Следите за нами в Instagram</p>
-                    <a href="https://www.instagram.com/" target="_blank" class="instagram-link">@your_instagram_handle</a>
-                </div>
-            </div>
-            
-            <p class="instagram-disclaimer">
-                * Instagram принадлежит компании Meta Platforms Inc., которая признана экстремистской организацией и запрещена на территории РФ
-            </p>
-        </div>
+        <p class="instagram-disclaimer">
+            * Instagram принадлежит компании Meta Platforms Inc., которая признана экстремистской организацией и запрещена на территории РФ
+        </p>
     </section>
 
     <!-- Project Gallery Modal -->

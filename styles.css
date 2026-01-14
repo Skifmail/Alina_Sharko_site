@@ -91,32 +91,48 @@ h6 {
     /* 1 см */
     background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 0;
     z-index: 9999;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #b30000;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-reveal-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    z-index: 10000;
+    background: transparent;
+}
+
+.nav-reveal-zone:hover + .top-navigation,
+.top-navigation:hover {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.top-navigation.nav-at-top {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .nav-ornament {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    transition: all 0.3s ease;
-    padding: 5px 0;
-    mix-blend-mode: multiply;
-    /* Убирает белый фон изображения */
+    display: none;
 }
 
 .nav-ornament-left {
-    margin-left: 20px;
-    transform: scaleX(-1);
-    /* Зеркально отражаем левый вензель */
+    display: none;
 }
 
 .nav-ornament-right {
-    margin-right: 20px;
+    display: none;
 }
 
 .nav-buttons-container {
@@ -179,7 +195,7 @@ h6 {
    ============================================ */
 .block-1 {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -187,7 +203,7 @@ h6 {
 
 /* Белая полоска с текстом (15% от блока) */
 .top-bar {
-    height: 15vh;
+    height: 9.6vh;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -197,53 +213,62 @@ h6 {
 
 .top-bar p {
     color: #000000;
-    font-size: clamp(1.7rem, 4vw, 3rem);
+    font-size: clamp(1.2rem, 2.8vw, 2.08rem);
     font-weight: 400;
     text-align: center;
-    letter-spacing: 2px;
+    letter-spacing: 0.8px;
     font-family: 'Impact', Arial, sans-serif;
 }
 
-/* Бегущая строка (25% от блока) */
-.marquee-container {
-    height: 25vh;
-    background-color: #000000;
+/* Бегущая строка LED (25% от блока) */
+.led-board {
+    height: clamp(140px, 39vh, 218px);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
     overflow: hidden;
+    background:
+        radial-gradient(circle, #222 35%, transparent 36%) 0 0 / 8px 8px;
+    background-color: #000;
     display: flex;
     align-items: center;
-    position: relative;
 }
 
-.marquee {
+.led-track {
     display: flex;
+    align-items: center;
+    gap: 80px;
     white-space: nowrap;
-    animation: marquee 40s linear infinite;
+    animation: led-marquee 20s linear infinite;
 }
 
-.marquee span {
-    color: #b30000;
-    font-size: 12.5vh;
-    font-weight: 400;
-    letter-spacing: 8px;
-    padding-right: 50px;
-    font-family: 'Impact', Arial, sans-serif;
+.led-text {
+    position: absolute;
+    position: relative;
+    white-space: nowrap;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(5.26rem, 10.56vw, 8.22rem);
+    font-weight: 700;
     text-transform: uppercase;
-    line-height: 1;
+    color: transparent;
+    background:
+        radial-gradient(circle, #ff1b1b 38%, transparent 40%) 0 0 / 8px 8px;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
+@keyframes led-marquee {
+    from {
+        transform: translateX(0%);
     }
-
-    100% {
+    to {
         transform: translateX(-50%);
     }
 }
 
 /* Героический раздел с фоном (60% от блока) */
 .hero-section {
-    height: 60vh;
+    height: 66vh;
     background-image: url('images/block_1.jpeg');
     background-size: cover;
     background-position: top;
@@ -287,63 +312,100 @@ h6 {
    ============================================ */
 .block-separator {
     width: 100%;
-    height: 20px;
-    /* Replaced 0.5cm */
-    background: linear-gradient(90deg,
-            #000000 0%,
-            #b30000 25%,
-            #b30000 75%,
-            #000000 100%);
+    height: 16px !important;
+    /* Replaced 0.5cm, уменьшено на 40% */
+    background: #ffffff !important;
     position: relative;
     overflow: hidden;
 }
 
 .block-separator::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    display: none;
 }
 
 /* ============================================
    БЛОК 2: КТО МЫ ТАКИЕ
    ============================================ */
 .block-2 {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    background-image: url('images/block_2.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #ffffff;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 5% 80px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
     position: relative;
     overflow: hidden;
+}
+
+.block-2-content-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.block-2-left-image {
+    width: 45%;
+    height: 100%;
+    padding-left: 0.5cm;
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
+.block-2-left-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.block-2-right-content {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5cm;
+    padding-top: 0px;
+    padding-bottom: 60px;
+    padding-left: 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    flex-shrink: 0;
+    overflow: visible;
+    gap: 0;
+}
+
+.block-2-right-image {
+    position: absolute;
+    top: -30px;
+    right: 0.5cm;
+    width: auto;
+    height: 50%;
+    margin-bottom: 0;
+    z-index: 1;
+}
+
+.block-2-right-image img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: right top;
 }
 
 .block-2-title {
     font-family: 'Impact', Arial, sans-serif !important;
     font-weight: 400 !important;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     color: #000000;
     text-align: left;
-    margin: 0;
+    margin: 0 0 20px 0;
+    margin-left: -100px;
+    margin-top: -35%;
     line-height: 1.4;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
-    max-width: 1200px;
-    width: 100%;
-    display: block;
-    padding-left: 450px;
     letter-spacing: 2px;
-    /* Replaced 12cm */
 }
 
 .block-2-text-container {
@@ -351,33 +413,34 @@ h6 {
     padding: 0;
     border-radius: 0;
     box-shadow: none;
-    width: 50vw;
-    max-height: 50vh;
-    overflow-y: auto;
-    position: absolute;
-    bottom: calc(5% + 17px);
-    /* Replaced 1cm */
-    right: 58px;
-    /* Replaced 0.5cm */
+    width: 100%;
+    margin-top: 50%;
+    padding-top: 0;
+    flex: 1 0 auto;
+    overflow: visible;
+    display: block;
+    position: relative;
+    z-index: 2;
 }
 
 .block-2-subtitle-text {
     font-family: 'Cormorant', serif;
-    font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
     color: #000000;
     line-height: 1.6;
     text-align: left;
     margin: 0 0 25px 0;
-    font-style: italic;
+    font-style: normal;
 }
 
 .block-2-text {
     font-family: 'Cormorant', serif;
-    font-size: clamp(1.1rem, 1.4vw, 1.1rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
     color: #000000;
     line-height: 1.8;
-    text-align: justify;
+    text-align: left;
     margin: 0 0 20px 0;
+    font-style: normal;
 }
 
 .block-2-text:last-child {
@@ -388,7 +451,7 @@ h6 {
    БЛОК 3: КАРУСЕЛЬ И ЭТАПЫ РАБОТЫ
    ============================================ */
 .block-3 {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background-color: #ffffff;
     display: flex;
@@ -502,10 +565,17 @@ h6 {
 }
 
 /* Нижнее изображение */
+.block-3-bottom-images {
+    display: flex;
+    width: 100%;
+    gap: 0;
+}
+
 .block-3-bottom-image {
     height: 38vh;
-    width: 100%;
+    width: 50%;
     overflow: hidden;
+    flex: 1;
 }
 
 .block-3-bottom-image img {
@@ -560,24 +630,40 @@ h6 {
    БЛОК 4: ФОРМА ОБРАТНОЙ СВЯЗИ
    ============================================ */
 .block-4 {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     width: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
 }
 
 .block-4-top-image {
-    height: 25vh;
-    width: 100%;
+    height: 70vh;
+    width: 100vw;
     overflow: hidden;
+    margin-left: calc(-50vw + 50%);
+    flex-shrink: 0;
 }
 
 .block-4-top-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+.block-4-title {
+    font-family: 'Impact', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 3.6rem;
+    text-align: center;
+    color: #000000;
+    margin: 40px 0 20px 0;
+    letter-spacing: 2px;
 }
 
 .block-4-form-container {
@@ -767,7 +853,7 @@ h6 {
     background-color: #ffffff;
     padding: 0;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -788,9 +874,9 @@ h6 {
 
 /* Marquee with stacked text */
 .block-5-marquee-container {
-    background-color: #ffffff;
+    background-color: transparent;
     overflow: hidden;
-    height: 80px;
+    height: 110px;
     display: flex;
     align-items: center;
     margin-bottom: 35px;
@@ -809,15 +895,32 @@ h6 {
 }
 
 .block-5-marquee-text {
-    font-family: 'Impact', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 1.8rem;
-    line-height: 1;
-    color: #b30000;
+    font-family: 'Impact', monospace;
+    font-weight: 700;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    color: #ff1f1f;
     margin-right: 80px;
     /* Увеличили отступ между блоками текста */
     text-align: center;
     display: inline-block;
+    text-transform: uppercase;
+    
+}
+
+.block-5-marquee-text::after {
+    content: '';
+    display: block;
+}
+
+.marquee-top {
+    display: inline-block;
+}
+
+.marquee-bottom {
+    display: inline-block;
+    letter-spacing: 0.22em;
+    margin-left: 0.27em;
 }
 
 @keyframes scroll-marquee-5 {
@@ -967,85 +1070,17 @@ h6 {
 }
 
 /* ============================================
-   БЛОК 6 - ПАКЕТНЫЕ ПРЕДЛОЖЕНИЯ
+   БЛОК 6 - INSTAGRAM СЕКЦИЯ
    ============================================ */
 .block-6 {
     background-color: #ffffff;
-    padding: 0 0 40px 0;
+    padding: 60px 40px;
     position: relative;
-    height: 100vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
-}
-
-.block-6-title {
-    font-family: 'Impact', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 3.6rem;
-    text-align: center;
-    color: #000000;
-    margin: 76px 0 40px;
-    letter-spacing: 2px;
-}
-
-/* Packages Grid */
-.packages-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 50px;
-    row-gap: 25px;
-    padding: 0 40px 50px 40px;
-    max-width: 1280px;
-    margin: 0 auto;
-    flex-grow: 1;
-    align-content: center;
-}
-
-.package-item {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    text-align: center;
-}
-
-.package-item:hover {
-    transform: translateY(-10px);
-}
-
-.package-item:hover .package-cover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-}
-
-.package-cover {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-}
-
-.package-cta {
-    font-family: 'Impact', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 1.3rem;
-    color: #b30000;
-    margin-top: 12px;
-    letter-spacing: 1.5px;
-    transition: color 0.3s ease;
-}
-
-.package-item:hover .package-cta {
-    color: #8b0000;
-}
-
-/* Instagram Section */
-.instagram-section {
-    max-width: 1000px;
-    margin: -75px auto 0;
-    /* Replaced -2cm */
-    padding: 40px 40px 50px;
+    align-items: center;
     text-align: center;
 }
 
@@ -1060,45 +1095,86 @@ h6 {
 
 .instagram-subtitle {
     font-family: 'Cormorant', serif;
-    font-style: italic;
+    font-style: normal;
     font-size: 1.5rem;
     color: #b30000;
-    margin: 0 0 30px 0;
+    margin: 0 0 40px 0;
     letter-spacing: 3px;
 }
 
-.instagram-embed {
-    margin: 30px 0;
-    min-height: 300px;
+.instagram-feed {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto 30px;
+}
+
+/* Elfsight Instagram embed sizing */
+.instagram-embed-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elfsight-app-bd39b4e0-da51-4ff9-bed6-e0cad7a4d7e0 {
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto 30px !important;
+    display: block;
+}
+
+.instagram-post {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.instagram-post:hover {
+    transform: scale(1.05);
+}
+
+.instagram-post a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.instagram-post-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.instagram-placeholder {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    padding: 40px;
-    border-radius: 15px;
-    color: #ffffff;
-}
-
-.instagram-placeholder p {
-    font-family: 'Cormorant', serif;
-    font-size: 1.5rem;
-    margin: 0 0 15px 0;
-}
-
-.instagram-link {
-    font-family: 'Cormorant', serif;
-    font-weight: 600;
-    font-size: 1.8rem;
-    color: #ffffff;
-    text-decoration: none;
+    font-size: 3rem;
     transition: opacity 0.3s ease;
 }
 
-.instagram-link:hover {
-    opacity: 0.8;
+.instagram-post-placeholder:hover {
+    opacity: 0.9;
+}
+
+.instagram-link-container {
+    margin: 20px 0;
+}
+
+.instagram-profile-link {
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #b30000;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    display: inline-block;
+}
+
+.instagram-profile-link:hover {
+    opacity: 0.7;
 }
 
 .instagram-disclaimer {
@@ -1293,9 +1369,18 @@ h6 {
    АДАПТИВНОСТЬ: ПЛАНШЕТЫ
    ============================================ */
 @media screen and (max-width: 1024px) {
+    .nav-reveal-zone {
+        display: none;
+    }
+
+    .top-navigation {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     .top-bar p {
-        font-size: clamp(1rem, 3vw, 2rem);
-        letter-spacing: 1px;
+        font-size: clamp(0.9rem, 2.7vw, 1.6rem);
+        letter-spacing: 0.5px;
     }
 
     .marquee span {
@@ -1313,20 +1398,59 @@ h6 {
 
     /* Блок 2 на планшетах */
     .block-2 {
-        padding: 50px 4% 60px;
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        min-height: auto;
+    }
+
+    .block-2-content-wrapper {
+        flex-direction: column;
+    }
+
+    .block-2-left-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .block-2-left-image img {
+        height: auto;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .block-2-right-content {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+        padding-right: 0.5cm;
+    }
+
+    .block-2-right-image {
+        display: none;
     }
 
     .block-2-title {
-        font-size: clamp(1.8rem, 5vw, 3rem);
-        padding-left: 50px;
-        /* Reduced padding for tablets */
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        margin-bottom: 15px;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .block-2-subtitle-text {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+    }
+
+    .block-2-text {
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
     }
 
     .block-2-text-container {
-        padding: 30px;
-        width: 55vw;
-        max-height: 45vh;
-        bottom: 4%;
+        padding: 0;
+        width: 100%;
+        max-height: none;
+        bottom: auto;
         right: 0;
     }
 
@@ -1346,6 +1470,47 @@ h6 {
         grid-template-columns: repeat(2, 1fr);
         column-gap: 40px;
         padding: 0 30px 50px;
+    }
+
+    /* Блок 6 на планшетах */
+    .block-6 {
+        padding: 40px 30px;
+    }
+
+    .instagram-title {
+        font-size: 2rem;
+    }
+
+    .instagram-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .instagram-feed {
+        gap: 15px;
+        max-width: 700px;
+    }
+
+    .instagram-post-placeholder {
+        font-size: 2.5rem;
+    }
+
+    .instagram-profile-link {
+        font-size: 1.6rem;
+    }
+
+    /* Блок 4 на планшетах */
+    .block-4-top-image {
+        height: auto;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    .block-4-top-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        aspect-ratio: 16 / 9;
     }
 
     /* Hide 3rd item in row or wrap gracefully? Grid auto-flow handles it, but 2 col means even rows */
@@ -1394,8 +1559,7 @@ h6 {
     .block-2,
     .block-3,
     .block-4,
-    .block-5,
-    .block-6 {
+    .block-5 {
         height: auto !important;
         min-height: 100vh;
         overflow: visible !important;
@@ -1408,23 +1572,30 @@ h6 {
 
     .top-bar {
         height: auto;
-        min-height: 15vh;
+        min-height: 12vh;
         padding: 20px 15px;
     }
 
     .top-bar p {
-        font-size: clamp(0.9rem, 4vw, 1.5rem);
-        letter-spacing: 1px;
+        font-size: clamp(0.8rem, 3.5vw, 1.3rem);
+        letter-spacing: 0.4px;
     }
 
-    .marquee-container {
-        height: auto;
-        min-height: 25vh;
+    .led-board {
+        height: clamp(125px, 34.32vh, 187px);
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        background:
+            radial-gradient(circle, #222 35%, transparent 36%) 0 0 / 6px 6px;
+        background-color: #000;
     }
 
-    .marquee span {
-        font-size: 8vh;
-        letter-spacing: 2px;
+    .led-text {
+        font-size: clamp(3.5rem, 11vw, 5.6rem);
+        background:
+            radial-gradient(circle, #ff1b1b 38%, transparent 40%) 0 0 / 6px 6px;
+        -webkit-background-clip: text;
+        background-clip: text;
     }
 
     .carousel-track {
@@ -1481,39 +1652,177 @@ h6 {
         font-size: 1.1rem;
     }
 
+    .phone-input-wrapper {
+        width: 100%;
+    }
+
+    .phone-input-wrapper input {
+        width: 100%;
+        padding-left: 45px;
+    }
+
+    .date-input-wrapper {
+        width: 100%;
+    }
+
+    .date-input-wrapper input {
+        width: 100%;
+        padding-right: 45px;
+    }
+
+    .form-field input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Блок 4 на мобильных */
+    .block-4-title {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        margin: 30px 20px 20px 20px;
+    }
+
+    /* Блок 6 на мобильных */
+    .block-6 {
+        padding: 30px 20px;
+        min-height: auto;
+    }
+
+    .instagram-title {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+
+    .instagram-subtitle {
+        font-size: 1.2rem;
+        margin: 0 0 30px 0;
+    }
+
+    .instagram-feed {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .instagram-post-placeholder {
+        font-size: 2rem;
+    }
+
+    .instagram-profile-link {
+        font-size: 1.4rem;
+    }
+
+    .instagram-disclaimer {
+        font-size: 0.8rem;
+        margin-top: 20px;
+    }
+
     /* Блок 2 на мобильных */
     .block-2 {
-        padding: 40px 5%;
-        justify-content: flex-start;
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        min-height: auto;
+    }
+
+    .block-2-content-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .block-2-left-image {
+        width: 100%;
+        height: auto;
+        padding-left: 0;
+    }
+
+    .block-2-left-image img {
+        height: auto;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .block-2-right-content {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        padding: 30px 20px;
+        padding-left: 20px;
+        position: relative;
+    }
+
+    .block-2-right-image {
+        position: static;
+        display: block;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        top: auto;
+        right: auto;
+    }
+
+    .block-2-right-image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
     }
 
     .block-2-title {
-        font-size: clamp(1.5rem, 6vw, 2.5rem);
-        text-align: center;
-        margin-bottom: 40px;
+        font-size: clamp(1.3rem, 5vw, 2rem);
+        text-align: left;
+        margin-bottom: 15px;
         padding-left: 0;
-        letter-spacing: normal;
-        /* Reset padding strictly */
+        letter-spacing: 1px;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
     }
 
     .block-2-text-container {
-        padding: 20px;
-        width: 90vw;
+        padding: 0;
+        width: 100%;
         max-height: none;
-        position: relative;
-        bottom: auto;
-        right: auto;
-        margin: 0 auto;
+        margin: 0;
+        overflow: visible;
+        display: block;
     }
 
     .block-2-subtitle-text {
-        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        font-size: clamp(1rem, 3vw, 1.3rem);
         margin-bottom: 15px;
+        text-align: left;
+        font-style: normal;
     }
 
     .block-2-text {
         text-align: left;
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        font-size: clamp(0.9rem, 2.3vw, 1.1rem);
+        font-style: normal;
+    }
+
+    /* Блок 3 на мобильных */
+    .block-3-bottom-images {
+        flex-direction: column;
+    }
+
+    .block-3-bottom-image {
+        width: 100%;
+        height: 40vh;
+    }
+
+    /* Блок 4 на мобильных */
+    .block-4-top-image {
+        height: auto;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    .block-4-top-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        aspect-ratio: 16 / 9;
     }
 }
 
@@ -1522,8 +1831,8 @@ h6 {
    ============================================ */
 @media screen and (max-width: 480px) {
     .top-bar p {
-        font-size: clamp(0.8rem, 4.5vw, 1.2rem);
-        letter-spacing: 0.5px;
+        font-size: clamp(0.75rem, 4vw, 1.1rem);
+        letter-spacing: 0.3px;
     }
 
     /* Adjust padding for taller mobile nav */
@@ -1610,6 +1919,11 @@ h6 {
         font-size: clamp(1rem, 3vw, 1.5rem);
     }
 
+    .block-2-title {
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1619,47 +1933,6 @@ h6 {
 
     .project-caption {
         font-size: 1.2rem;
-    }
-
-    .block-6-title {
-        font-size: clamp(1.8rem, 6vw, 3rem);
-        padding-top: 3rem;
-        padding-bottom: 40px;
-    }
-
-    .packages-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 30px 5% 60px;
-        flex-grow: 1;
-    }
-
-    .package-cta {
-        font-size: 1.1rem;
-    }
-
-    .instagram-section {
-        padding: 40px 20px;
-    }
-
-    .instagram-title {
-        font-size: 2rem;
-    }
-
-    .instagram-subtitle {
-        font-size: 1.3rem;
-    }
-
-    .instagram-placeholder {
-        padding: 40px 20px;
-    }
-
-    .instagram-placeholder p {
-        font-size: 1.2rem;
-    }
-
-    .instagram-link {
-        font-size: 1.4rem;
     }
 
     /* Gallery Mobile Navigation */

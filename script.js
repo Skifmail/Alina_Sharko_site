@@ -14,6 +14,33 @@ function scrollToForm() {
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
+    // УПРАВЛЕНИЕ ВИДИМОСТЬЮ НАВИГАЦИОННОЙ ПАНЕЛИ
+    // ============================================
+    const topNavigation = document.querySelector('.top-navigation');
+    const block1 = document.getElementById('block-1');
+    
+    // Определяем высоту блока 1
+    let block1Height = block1 ? block1.offsetHeight : 0;
+    
+    // Обработчик прокрутки для управления видимостью навигации
+    window.addEventListener('scroll', function() {
+        const scrollY = window.scrollY;
+        
+        // Если скролл в пределах первого блока, показываем панель постоянно
+        if (scrollY < block1Height) {
+            topNavigation.classList.add('nav-at-top');
+        } else {
+            // Если скролл прошёл первый блок, скрываем панель (показывается только при hover)
+            topNavigation.classList.remove('nav-at-top');
+        }
+    });
+    
+    // Инициальная проверка при загрузке (на случай, если страница открылась с якорем)
+    if (window.scrollY < block1Height) {
+        topNavigation.classList.add('nav-at-top');
+    }
+    
+    // ============================================
     // ПЛАВНАЯ ПРОКРУТКА ДЛЯ НАВИГАЦИИ
     // ============================================
     const navLinks = document.querySelectorAll('.nav-btn');

@@ -1591,7 +1591,7 @@ h6 {
     }
 
     .led-text {
-        font-size: clamp(3.5rem, 11vw, 5.6rem);
+        font-size: clamp(7rem, 22vw, 11.2rem);
         background:
             radial-gradient(circle, #ff1b1b 38%, transparent 40%) 0 0 / 6px 6px;
         -webkit-background-clip: text;

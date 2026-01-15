@@ -1,16 +1,13 @@
 // ============================================
 // TELEGRAM BOT CONFIGURATION
 // ============================================
-const TELEGRAM_BOT_TOKEN = '8525374282:AAFhP5OD9vnO3nuzLPYgu9PfIST5w6tYhFo'; // от @BotFather
-const TELEGRAM_CHAT_ID = '538756743'; // ваш ID из @userinfobot
+// ВАЖНО: Для безопасности перенесите отправку на сервер!
+// Эти данные должны быть на backend, а не в клиентском коде.
+// Временное решение - используйте серверный endpoint.
+const TELEGRAM_ENDPOINT = '/api/send-telegram'; // Создайте серверный endpoint
 
-// Функция отправки сообщения в Telegram
+// Функция отправки сообщения через серверный endpoint
 async function sendToTelegram(formData) {
-    if (TELEGRAM_BOT_TOKEN === 'ЗАМЕНИТЕ_НА_ВАШ_ТОКЕН' || TELEGRAM_CHAT_ID === 'ЗАМЕНИТЕ_НА_ВАШ_CHAT_ID') {
-        console.warn('Telegram не настроен. Заполните BOT_TOKEN и CHAT_ID в script.js');
-        return;
-    }
-
     const commentSection = formData.comments ? `<b>💬 Комментарий:</b>\n${formData.comments}\n\n` : '';
     const message = `
 <b>📋 Новая заявка с сайта alina-sharko.ru</b>
@@ -23,25 +20,21 @@ ${commentSection}
     `;
     
     try {
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        const response = await fetch(TELEGRAM_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: message,
-                parse_mode: 'HTML'
-            })
+            body: JSON.stringify({ message })
         });
         
         if (response.ok) {
-            console.log('✅ Сообщение отправлено в Telegram');
+            console.log('✅ Сообщение отправлено');
         } else {
-            console.error('❌ Ошибка при отправке в Telegram:', response.statusText);
+            console.error('❌ Ошибка при отправке:', response.statusText);
         }
     } catch (error) {
-        console.error('❌ Ошибка сети при отправке в Telegram:', error);
+        console.error('❌ Ошибка сети при отправке:', error);
     }
 }
 
@@ -272,6 +265,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.querySelector('.submit-cta-button');
     const calendarIcon = document.querySelector('.calendar-icon');
 
+    // Прогресс-бар для формы
+    const progressFill = document.getElementById('formProgressFill');
+    const progressPercent = document.getElementById('formProgressPercent');
+
+    function updateFormProgress() {
+        if (!progressFill || !progressPercent) return;
+
+        // Обязательные поля: телефон, дата, email, бюджет, согласие
+        const requiredFields = [
+            { element: phoneInput, minLength: 18 }, // +7 (000) 000-00-00
+            { element: dateInput, minLength: 10 },  // ДД.ММ.ГГГГ
+            { element: emailInput, minLength: 5 },
+            { element: budgetInput, minLength: 1 },
+            { element: consentCheckbox, type: 'checkbox' }
+        ];
+
+        let filledCount = 0;
+        requiredFields.forEach(field => {
+            if (field.type === 'checkbox') {
+                if (field.element && field.element.checked) {
+                    filledCount++;
+                }
+            } else {
+                if (field.element && field.element.value.length >= field.minLength) {
+                    filledCount++;
+                }
+            }
+        });
+
+        const progress = Math.round((filledCount / requiredFields.length) * 100);
+        progressFill.style.width = progress + '%';
+        progressPercent.textContent = progress;
+    }
+
+    // Отслеживание изменений во всех полях формы
+    if (phoneInput) phoneInput.addEventListener('input', updateFormProgress);
+    if (dateInput) dateInput.addEventListener('input', updateFormProgress);
+    if (emailInput) emailInput.addEventListener('input', updateFormProgress);
+    if (budgetInput) budgetInput.addEventListener('input', updateFormProgress);
+    if (consentCheckbox) consentCheckbox.addEventListener('change', updateFormProgress);
+
+    // Инициальная проверка
+    updateFormProgress();
+
     // Маска для телефона +7 (000) 000-00-00
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
@@ -433,6 +470,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Показываем индикатор загрузки
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'ОТПРАВКА...';
+            submitButton.style.opacity = '0.7';
+
             // Сбор данных формы
             const formData = {
                 phone: phoneInput.value,
@@ -444,13 +487,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('Данные формы:', formData);
             
-            // Отправка в Telegram
-            await sendToTelegram(formData);
-            
-            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
-            
-            // Очистка формы
-            mainForm.reset();
+            try {
+                // Отправка в Telegram
+                await sendToTelegram(formData);
+                
+                alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+                
+                // Очистка формы
+                mainForm.reset();
+            } catch (error) {
+                alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
+                console.error('Ошибка отправки формы:', error);
+            } finally {
+                // Восстанавливаем кнопку
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                submitButton.style.opacity = '1';
+            }
         });
     }
 

@@ -1,40 +1,49 @@
 // ============================================
 // TELEGRAM BOT CONFIGURATION
 // ============================================
-// ВАЖНО: Для безопасности перенесите отправку на сервер!
-// Эти данные должны быть на backend, а не в клиентском коде.
-// Временное решение - используйте серверный endpoint.
-const TELEGRAM_ENDPOINT = '/api/send-telegram'; // Создайте серверный endpoint
+const BOT_TOKEN = '8551578282:AAGxkMgLLsVztcweq1pnc7nkYX4Pyn62OXY';
+const CHAT_ID = '847497161'; // Замените на ваш Chat ID (получить можно командой /start боту @userinfobot)
 
-// Функция отправки сообщения через серверный endpoint
+// Функция отправки сообщения в Telegram
 async function sendToTelegram(formData) {
     const commentSection = formData.comments ? `<b>💬 Комментарий:</b>\n${formData.comments}\n\n` : '';
-    const message = `
-<b>📋 Новая заявка с сайта alina-sharko.ru</b>
+    const message = `<b>📋 Новая заявка с сайта detalidekora.ru</b>
 
 <b>📱 Телефон:</b> ${formData.phone}
 <b>📅 Дата мероприятия:</b> ${formData.eventDate}
 <b>📧 Email:</b> ${formData.email}
-<b>💰 Бюджет:</b> ${formData.budget.toLocaleString('ru-RU')} ₽
-${commentSection}
-    `;
+<b>💰 Бюджет:</b> ${parseInt(formData.budget).toLocaleString('ru-RU')} ₽
+${commentSection}`;
+    
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     
     try {
-        const response = await fetch(TELEGRAM_ENDPOINT, {
+        console.log('📤 Отправка в Telegram...', { url, chatId: CHAT_ID });
+        
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
         });
         
-        if (response.ok) {
-            console.log('✅ Сообщение отправлено');
+        const responseData = await response.json();
+        
+        if (response.ok && responseData.ok) {
+            console.log('✅ Сообщение успешно отправлено в Telegram');
+            return true;
         } else {
-            console.error('❌ Ошибка при отправке:', response.statusText);
+            console.error('❌ Ошибка Telegram API:', responseData);
+            throw new Error(`Telegram API ошибка: ${responseData.description || 'Неизвестная ошибка'}`);
         }
     } catch (error) {
-        console.error('❌ Ошибка сети при отправке:', error);
+        console.error('❌ Ошибка при отправке в Telegram:', error);
+        throw error;
     }
 }
 
@@ -518,6 +527,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryPrev = document.querySelector('.gallery-prev');
     const galleryNext = document.querySelector('.gallery-next');
     const galleryCounter = document.querySelector('.gallery-counter');
+    const galleryGrid = document.getElementById('gallery-grid');
+    const galleryGridView = document.getElementById('gallery-grid-view');
+    const galleryFullscreenView = document.getElementById('gallery-fullscreen-view');
+    const backToGridBtn = document.querySelector('.back-to-grid-btn');
     
     let currentProject = null;
     let currentImageIndex = 0;
@@ -545,10 +558,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 projectImages.push(`images/projects/project_${currentProject}/${i}.jpeg`);
             }
             
-            currentImageIndex = 0;
-            showGalleryImage();
+            // Отображаем сетку фотографий
+            showGalleryGrid();
             galleryModal.classList.add('active');
         });
+    });
+    
+    // Показать сетку фотографий
+    function showGalleryGrid() {
+        galleryGrid.innerHTML = '';
+        projectImages.forEach((imagePath, index) => {
+            const gridItem = document.createElement('div');
+            gridItem.className = 'gallery-grid-item';
+            gridItem.innerHTML = `<img src="${imagePath}" alt="Project photo ${index + 1}" loading="lazy">`;
+            gridItem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = index;
+                showFullscreenView();
+            });
+            galleryGrid.appendChild(gridItem);
+        });
+        galleryGridView.style.display = 'block';
+        galleryFullscreenView.style.display = 'none';
+    }
+    
+    // Показать полноэкранный просмотр
+    function showFullscreenView() {
+        galleryGridView.style.display = 'none';
+        galleryFullscreenView.style.display = 'flex';
+        showGalleryImage();
+    }
+    
+    // Вернуться в сетку
+    backToGridBtn.addEventListener('click', function() {
+        showGalleryGrid();
     });
     
     // Показать текущее изображение
@@ -576,6 +619,7 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryModal.classList.remove('active');
         projectImages = [];
         currentProject = null;
+        galleryGrid.innerHTML = '';
     });
     
     // Закрытие по клику вне изображения

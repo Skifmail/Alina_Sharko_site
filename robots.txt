@@ -6,7 +6,7 @@ Allow: /
 Disallow: /privacy-policy.html
 
 # Указываем путь к карте сайта
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://detalidekora.ru/sitemap.xml
 
 # Специальные правила для Яндекса
 User-agent: Yandex

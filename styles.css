@@ -202,7 +202,7 @@ h6 {
 
 /* Белая полоска с текстом (15% от блока) */
 .top-bar {
-    height: 9.6vh;
+    height: 5.6vh;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -266,7 +266,7 @@ h6 {
 
 /* Героический раздел с фоном (60% от блока) */
 .hero-section {
-    height: 66vh;
+    height: 72vh;
     background-image: url('images/block_1.jpeg');
     background-size: cover;
     background-position: top;
@@ -310,8 +310,7 @@ h6 {
    ============================================ */
 .block-separator {
     width: 100%;
-    height: 16px !important;
-    /* Replaced 0.5cm, уменьшено на 40% */
+    height: 1cm !important;
     background: #ffffff !important;
     position: relative;
     overflow: hidden;
@@ -412,7 +411,7 @@ h6 {
     border-radius: 0;
     box-shadow: none;
     width: 100%;
-    margin-top: 50%;
+    margin-top: 11cm;
     padding-top: 0;
     flex: 1 0 auto;
     overflow: visible;
@@ -449,22 +448,22 @@ h6 {
    БЛОК 3: КАРУСЕЛЬ И ЭТАПЫ РАБОТЫ
    ============================================ */
 .block-3 {
-    min-height: 100vh;
+    min-height: auto;
     width: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Карусель */
 .carousel-container {
-    height: 45vh;
+    height: 35vh;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
-    margin-top: 52px;
-    /* Replaced 1.8cm */
+    margin-top: 0;
+    padding: 10px 0;
 }
 
 .carousel-track {
@@ -507,14 +506,13 @@ h6 {
 
 /* Текстовый блок */
 .block-3-text-section {
-    min-height: 14vh;
-    /* Changed from fixed height */
+    min-height: auto;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 36px 5%;
+    padding: 20px 5%;
     text-align: center;
 }
 
@@ -629,13 +627,14 @@ h6 {
    ============================================ */
 .block-4 {
     height: auto;
-    min-height: 100vh;
+    min-height: auto;
     width: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     overflow: visible;
     position: relative;
+    scroll-margin-top: -700px;
 }
 
 .block-4-top-image {
@@ -660,7 +659,7 @@ h6 {
     font-size: 3.6rem;
     text-align: center;
     color: #000000;
-    margin: 40px 0 20px 0;
+    margin: -40px 0 30px 0;
     letter-spacing: 2px;
 }
 
@@ -670,7 +669,7 @@ h6 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 5%;
+    padding: calc(40px - 2cm) 5%;
     max-width: 800px;
     margin: 0 auto;
     width: 100%;
@@ -678,11 +677,24 @@ h6 {
 
 .form-intro-text {
     font-family: 'Cormorant', serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(0.99rem, 1.5vw, 1.2rem);
     color: #333333;
     text-align: center;
     margin-bottom: 30px;
-    line-height: 1.6;
+    line-height: 1.4;
+    white-space: normal;
+    padding: 0 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* На больших экранах - одна строка */
+@media screen and (min-width: 1024px) {
+    .form-intro-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 /* Прогресс-бар заполнения формы */
@@ -1004,12 +1016,7 @@ h6 {
 }
 
 .project-caption {
-    font-family: 'Cormorant', serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #000000;
-    margin-top: 12px;
-    letter-spacing: 1px;
+    display: none;
 }
 
 /* Gallery Modal */
@@ -1023,13 +1030,42 @@ h6 {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
     animation: fadeIn 0.3s ease;
+    overflow-y: auto;
 }
 
 .gallery-modal.active {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+    padding: 40px 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid-item {
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.gallery-grid-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .gallery-close {
@@ -1101,6 +1137,34 @@ h6 {
     font-size: 1.2rem;
     margin-top: 20px;
     font-family: 'Cormorant', serif;
+}
+
+/* Gallery Fullscreen View */
+.gallery-fullscreen-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.back-to-grid-btn {
+    background-color: rgba(179, 0, 0, 0.8);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 30px;
+    font-family: 'Cormorant', serif;
+    transition: all 0.3s ease;
+}
+
+.back-to-grid-btn:hover {
+    background-color: rgba(179, 0, 0, 1);
+    transform: scale(1.05);
 }
 
 /* ============================================
@@ -1402,6 +1466,70 @@ h6 {
 /* ============================================
    АДАПТИВНОСТЬ: ПЛАНШЕТЫ
    ============================================ */
+@media screen and (max-width: 1280px) {
+    /* Блок 2: для экранов 10-12" текст не заходит на фото */
+    .block-2 {
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        min-height: auto;
+    }
+
+    /* Меньший scroll offset для планшетов */
+    .block-4 {
+        scroll-margin-top: -450px;
+    }
+
+    .block-4-form-container {
+        margin-top: 0cm;
+    }
+
+    .block-2-content-wrapper {
+        flex-direction: column;
+    }
+
+    .block-2-left-image,
+    .block-2-left-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .block-2-right-content {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 30px 30px 40px;
+    }
+
+    .block-2-right-image {
+        display: none;
+    }
+
+    .block-2-title {
+        margin: 0 0 15px 0 !important;
+        text-align: center;
+        font-size: clamp(2rem, 3.4vw, 2.6rem);
+    }
+
+    .block-2-text-container {
+        margin-top: 0cm;
+        padding: 0;
+        position: static;
+        width: 100%;
+    }
+
+    .block-2-subtitle-text {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        margin-bottom: 18px;
+    }
+
+    .block-2-text {
+        font-size: clamp(1rem, 1.6vw, 1.2rem);
+    }
+}
+
 @media screen and (max-width: 1024px) {
     .nav-reveal-zone {
         display: none;
@@ -1561,6 +1689,11 @@ h6 {
         padding: 0 5px;
     }
 
+    /* Меньший scroll offset для мобильных */
+    .block-4 {
+        scroll-margin-top: -80px;
+    }
+
     .nav-ornament {
         height: 80%;
         padding: 3px 0;
@@ -1606,8 +1739,8 @@ h6 {
 
     .top-bar {
         height: auto;
-        min-height: 12vh;
-        padding: 20px 15px;
+        min-height: 4vh;
+        padding: 7px 5px;
     }
 
     .top-bar p {
@@ -1630,6 +1763,42 @@ h6 {
             radial-gradient(circle, #ff1b1b 38%, transparent 40%) 0 0 / 6px 6px;
         -webkit-background-clip: text;
         background-clip: text;
+    }
+
+    /* Блок 2: текст всегда ниже изображений на мобильных */
+    .block-2-content-wrapper {
+        flex-direction: column;
+    }
+
+    .block-2-left-image,
+    .block-2-left-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .block-2-right-content {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 20px 15px 30px;
+        margin-top: 10px;
+    }
+
+    .block-2-right-image {
+        display: none;
+    }
+
+    .block-2-title {
+        margin: 0 0 15px 0 !important;
+        text-align: center;
+    }
+
+    .block-2-text-container {
+        margin-top: 0;
+        padding: 0;
+        position: static;
     }
 
     .carousel-track {
@@ -1712,7 +1881,7 @@ h6 {
     /* Блок 4 на мобильных */
     .block-4-title {
         font-size: clamp(1.8rem, 6vw, 3rem);
-        margin: 30px 20px 20px 20px;
+        margin: 30px 20px 50px 20px;
     }
 
     /* Блок 6 на мобильных */

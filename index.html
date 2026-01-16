@@ -12,24 +12,24 @@
     <meta name="googlebot" content="index, follow">
     <meta name="yandex" content="index, follow">
     
-    <!-- Open Graph / Facebook - замените your-domain.com на реальный домен -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://alina-sharko.ru/">
+    <meta property="og:url" content="https://detalidekora.ru/">
     <meta property="og:title" content="Студия Декора Алины Шарко - Профессиональное Оформление Мероприятий">
     <meta property="og:description" content="Эксклюзивное оформление свадеб, праздников и мероприятий. Превратим ваше торжество в незабываемое событие.">
-    <meta property="og:image" content="https://alina-sharko.ru/images/og-image.jpg">
+    <meta property="og:image" content="https://detalidekora.ru/images/og-image.jpg">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="Студия Декора Алины Шарко">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://alina-sharko.ru/">
+    <meta name="twitter:url" content="https://detalidekora.ru/">
     <meta name="twitter:title" content="Студия Декора Алины Шарко">
     <meta name="twitter:description" content="Профессиональное оформление мероприятий, свадеб и праздников">
-    <meta name="twitter:image" content="https://alina-sharko.ru/images/og-image.jpg">
+    <meta name="twitter:image" content="https://detalidekora.ru/images/og-image.jpg">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://alina-sharko.ru/">
+    <link rel="canonical" href="https://detalidekora.ru/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -94,14 +94,14 @@
         "@type": "LocalBusiness",
         "name": "Студия Декора Алины Шарко",
         "description": "Профессиональное оформление мероприятий, свадеб и праздников",
-        "url": "https://alina-sharko.ru",
+        "url": "https://detalidekora.ru",
         "telephone": "+7-XXX-XXX-XX-XX",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Москва",
             "addressCountry": "RU"
         },
-        "image": "https://alina-sharko.ru/images/og-image.jpg",
+        "image": "https://detalidekora.ru/images/og-image.jpg",
         "priceRange": "$$$",
         "openingHours": "Mo-Su 09:00-21:00",
         "sameAs": [
@@ -447,12 +447,22 @@
     <!-- Project Gallery Modal -->
     <div id="project-gallery-modal" class="gallery-modal">
         <span class="gallery-close">&times;</span>
-        <div class="gallery-content">
-            <button class="gallery-nav gallery-prev">‹</button>
-            <img id="gallery-image" src="" alt="Project Photo">
-            <button class="gallery-nav gallery-next">›</button>
+        
+        <!-- Grid View -->
+        <div id="gallery-grid-view" class="gallery-grid-view" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+            <div id="gallery-grid" class="gallery-grid"></div>
         </div>
-        <div class="gallery-counter"></div>
+        
+        <!-- Fullscreen View -->
+        <div id="gallery-fullscreen-view" class="gallery-fullscreen-view" style="display: none;">
+            <div class="gallery-content">
+                <button class="gallery-nav gallery-prev">‹</button>
+                <img id="gallery-image" src="" alt="Project Photo">
+                <button class="gallery-nav gallery-next">›</button>
+            </div>
+            <div class="gallery-counter"></div>
+            <button class="back-to-grid-btn">← Вернуться в сетку</button>
+        </div>
     </div>
 
     <!-- Package Gallery Modal -->

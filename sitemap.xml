@@ -4,7 +4,7 @@
     
     <!-- Главная страница -->
     <url>
-        <loc>https://your-domain.com/</loc>
+        <loc>https://detalidekora.ru/</loc>
         <lastmod>2025-12-29</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -12,7 +12,7 @@
     
     <!-- Политика конфиденциальности -->
     <url>
-        <loc>https://your-domain.com/privacy-policy.html</loc>
+        <loc>https://detalidekora.ru/privacy-policy.html</loc>
         <lastmod>2025-12-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>

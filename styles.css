@@ -111,7 +111,7 @@ h6 {
     background: transparent;
 }
 
-.nav-reveal-zone:hover + .top-navigation,
+.nav-reveal-zone:hover+.top-navigation,
 .top-navigation:hover {
     transform: translateY(0);
     opacity: 1;
@@ -259,6 +259,7 @@ h6 {
     from {
         transform: translateX(0%);
     }
+
     to {
         transform: translateX(-50%);
     }
@@ -266,7 +267,7 @@ h6 {
 
 /* Героический раздел с фоном (60% от блока) */
 .hero-section {
-    height: 72vh;
+    height: 142vh;
     background-image: url('images/block_1.jpeg');
     background-size: cover;
     background-position: top;
@@ -280,29 +281,52 @@ h6 {
 
 /* Красная кнопка */
 .cta-button {
+    position: fixed;
+    top: 50%;
+    left: 50px;
+    /* Fixed unit */
+    transform: translateY(-50%);
+    z-index: 10000;
     background-color: #b30000;
     color: #000000;
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 400;
     font-family: 'Impact', Arial, sans-serif;
-    padding: 30px 60px;
+    font-size: 1.5rem;
+    /* Increased size (~50%) */
+    padding: 32px 45px;
+    /* Increased padding (~50%) */
     border: none;
-    border-radius: 15px;
+    border-radius: 50px;
+    /* Fully oval shape */
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     letter-spacing: 2px;
+    transition: all 0.3s ease;
+    animation: cta-pulse-left 2s infinite;
+    text-transform: uppercase;
 }
 
 .cta-button:hover {
-    background-color: #8b0000;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    background-color: #d40000;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 6px 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%) scale(0.98);
+}
+
+@keyframes cta-pulse-left {
+    0% {
+        box-shadow: 0 0 0 0 rgba(179, 0, 0, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(179, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(179, 0, 0, 0);
+    }
 }
 
 /* ============================================
@@ -310,7 +334,8 @@ h6 {
    ============================================ */
 .block-separator {
     width: 100%;
-    height: 1cm !important;
+    height: 20px !important;
+    /* Reduced from 100px */
     background: #ffffff !important;
     position: relative;
     overflow: hidden;
@@ -320,11 +345,17 @@ h6 {
     display: none;
 }
 
+.block-separator--compact {
+    height: 26px !important;
+}
+
 /* ============================================
    БЛОК 2: КТО МЫ ТАКИЕ
    ============================================ */
 .block-2 {
-    min-height: 100vh;
+    min-height: auto;
+    padding: 60px 0;
+    /* Add vertical padding since min-height is gone */
     width: 100%;
     background-color: #ffffff;
     display: flex;
@@ -345,7 +376,8 @@ h6 {
 .block-2-left-image {
     width: 45%;
     height: 100%;
-    padding-left: 0.5cm;
+    padding-left: 20px;
+    /* Replaced 0.5cm */
     display: flex;
     align-items: stretch;
     flex-shrink: 0;
@@ -363,7 +395,8 @@ h6 {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-right: 0.5cm;
+    padding-right: 20px;
+    /* Replaced 0.5cm */
     padding-top: 0px;
     padding-bottom: 60px;
     padding-left: 40px;
@@ -378,7 +411,8 @@ h6 {
 .block-2-right-image {
     position: absolute;
     top: -30px;
-    right: 0.5cm;
+    right: 20px;
+    /* Replaced 0.5cm */
     width: auto;
     height: 50%;
     margin-bottom: 0;
@@ -411,7 +445,8 @@ h6 {
     border-radius: 0;
     box-shadow: none;
     width: 100%;
-    margin-top: 11cm;
+    margin-top: 390px;
+    /* Increased further by 50% (from 180px) to clear title questions */
     padding-top: 0;
     flex: 1 0 auto;
     overflow: visible;
@@ -422,21 +457,25 @@ h6 {
 
 .block-2-subtitle-text {
     font-family: 'Cormorant', serif;
-    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    /* Reduced size */
     color: #000000;
-    line-height: 1.6;
+    line-height: 1.4;
+    /* Reduced inter-line spacing */
     text-align: left;
-    margin: 0 0 25px 0;
+    margin: 0 0 20px 0;
     font-style: normal;
 }
 
 .block-2-text {
     font-family: 'Cormorant', serif;
-    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    /* Reduced size */
     color: #000000;
-    line-height: 1.8;
+    line-height: 1.5;
+    /* Reduced inter-line spacing */
     text-align: left;
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
     font-style: normal;
 }
 
@@ -659,8 +698,12 @@ h6 {
     font-size: 3.6rem;
     text-align: center;
     color: #000000;
-    margin: -40px 0 30px 0;
+    margin: -50px 0 30px 0;
+    /* Pulled up to overlap decorative image */
+    padding-top: 0px;
     letter-spacing: 2px;
+    position: relative;
+    z-index: 5;
 }
 
 .block-4-form-container {
@@ -669,10 +712,13 @@ h6 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: calc(40px - 2cm) 5%;
+    padding: 10px 5%;
+    /* Tightened padding */
     max-width: 800px;
     margin: 0 auto;
     width: 100%;
+    position: relative;
+    z-index: 5;
 }
 
 .form-intro-text {
@@ -897,9 +943,9 @@ h6 {
    ============================================ */
 .block-5 {
     background-color: #ffffff;
-    padding: 0;
+    padding: 60px 0 25px 0;
     position: relative;
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -951,7 +997,7 @@ h6 {
     text-align: center;
     display: inline-block;
     text-transform: uppercase;
-    
+
 }
 
 .block-5-marquee-text::after {
@@ -985,7 +1031,7 @@ h6 {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 75px;
     row-gap: 25px;
-    padding: 0 40px 50px 40px;
+    padding: 0 40px 25px 40px;
     max-width: 1150px;
     margin: 0 auto;
     flex-grow: 1;
@@ -1172,7 +1218,7 @@ h6 {
    ============================================ */
 .block-6 {
     background-color: #ffffff;
-    padding: 60px 40px;
+    padding: 40px 40px 50px 40px;
     position: relative;
     min-height: 50vh;
     display: flex;
@@ -1467,6 +1513,7 @@ h6 {
    АДАПТИВНОСТЬ: ПЛАНШЕТЫ
    ============================================ */
 @media screen and (max-width: 1280px) {
+
     /* Блок 2: для экранов 10-12" текст не заходит на фото */
     .block-2 {
         flex-direction: column;
@@ -1481,7 +1528,7 @@ h6 {
     }
 
     .block-4-form-container {
-        margin-top: 0cm;
+        margin-top: 0;
     }
 
     .block-2-content-wrapper {
@@ -1514,7 +1561,7 @@ h6 {
     }
 
     .block-2-text-container {
-        margin-top: 0cm;
+        margin-top: 0;
         padding: 0;
         position: static;
         width: 100%;
@@ -1586,7 +1633,8 @@ h6 {
         width: 100%;
         height: auto;
         padding: 30px;
-        padding-right: 0.5cm;
+        padding-right: 20px;
+        /* Replaced 0.5cm */
     }
 
     .block-2-right-image {
@@ -1721,6 +1769,11 @@ h6 {
         scroll-padding-top: 32px;
     }
 
+    .block-separator {
+        height: 20px !important;
+        /* Reduced from 50px */
+    }
+
     /* Block Reset for Mobile */
     .block-1,
     .block-2,
@@ -1822,11 +1875,15 @@ h6 {
     }
 
     .cta-button {
-        width: 90%;
-        max-width: 450px;
-        padding: 24px 45px;
-        font-size: clamp(1.35rem, 4vw, 1.8rem);
-        border-radius: 12px;
+        width: auto;
+        padding: 15px 30px;
+        font-size: 1rem;
+        border-radius: 0 40px 40px 0;
+        top: 50%;
+        left: 0;
+        bottom: auto;
+        right: auto;
+        transform: translateY(-50%);
     }
 
     .form-container {
@@ -2223,5 +2280,5 @@ h6 {
 
 .footer-link:hover {
     color: #ffffff;
-    border-bottom-color: #b30000;
+
 }

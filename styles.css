@@ -2266,6 +2266,14 @@ h6 {
     font-family: 'Cormorant', serif;
     font-size: 0.95rem;
     color: #ffffff;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+.footer-policy {
+    font-family: 'Cormorant', serif;
+    font-size: 0.95rem;
+    color: #ffffff;
     margin: 0;
     line-height: 1.6;
 }

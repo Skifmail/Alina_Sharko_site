@@ -53,16 +53,14 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 38px;
-    /* Отступ для фиксированной навигации */
+    scroll-padding-top: calc(38px + env(safe-area-inset-top, 0px));
 }
 
 body {
     font-family: 'Cormorant', serif;
     overflow-x: hidden;
     width: 100%;
-    padding-top: 38px;
-    /* 1 см - отступ для навигации */
+    padding-top: calc(38px + env(safe-area-inset-top, 0px));
 }
 
 /* Заголовки используют Impact */
@@ -86,8 +84,8 @@ h6 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 38px;
-    /* 1 см */
+    height: calc(38px + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
     background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
     display: flex;
     justify-content: center;
@@ -212,7 +210,7 @@ h6 {
 
 .top-bar p {
     color: #000000;
-    font-size: clamp(1.2rem, 2.8vw, 2.08rem);
+    font-size: clamp(1rem, 2.3vw, 1.6rem);
     font-weight: 400;
     text-align: center;
     letter-spacing: 0.8px;
@@ -221,7 +219,7 @@ h6 {
 
 /* Бегущая строка LED (25% от блока) */
 .led-board {
-    height: clamp(140px, 39vh, 218px);
+    height: clamp(140px, 39vh, 180px);
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     position: relative;
@@ -267,10 +265,11 @@ h6 {
 
 /* Героический раздел с фоном (60% от блока) */
 .hero-section {
-    height: 142vh;
+    height: 100vh;
     background-image: url('images/block_1.jpeg');
-    background-size: cover;
-    background-position: top;
+    background-size: 100%;
+    background-position: top center;
+    background-color: #0a0a0a;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
@@ -279,24 +278,21 @@ h6 {
     position: relative;
 }
 
-/* Красная кнопка */
+/* Красная кнопка - фиксирована в левом нижнем углу */
 .cta-button {
     position: fixed;
-    top: 50%;
-    left: 50px;
-    /* Fixed unit */
-    transform: translateY(-50%);
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: calc(24px + env(safe-area-inset-left, 0px));
     z-index: 10000;
     background-color: #b30000;
     color: #000000;
     font-family: 'Impact', Arial, sans-serif;
-    font-size: 1.5rem;
-    /* Increased size (~50%) */
-    padding: 32px 45px;
-    /* Increased padding (~50%) */
+    font-size: 1.2rem;
+    /* Уменьшено на 20% */
+    padding: 26px 36px;
+    /* Уменьшено на 20% */
     border: none;
     border-radius: 50px;
-    /* Fully oval shape */
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     letter-spacing: 2px;
@@ -307,12 +303,12 @@ h6 {
 
 .cta-button:hover {
     background-color: #d40000;
-    transform: translateY(-50%) scale(1.05);
+    transform: scale(1.05);
     box-shadow: 6px 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button:active {
-    transform: translateY(-50%) scale(0.98);
+    transform: scale(0.98);
 }
 
 @keyframes cta-pulse-left {
@@ -1597,8 +1593,10 @@ h6 {
     }
 
     .cta-button {
-        padding: 27px 52px;
-        font-size: clamp(1.35rem, 3vw, 1.95rem);
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        left: calc(20px + env(safe-area-inset-left, 0px));
+        padding: 22px 42px;
+        font-size: clamp(1.08rem, 2.4vw, 1.56rem);
     }
 
     .form-container {
@@ -1733,8 +1731,8 @@ h6 {
 
     /* Адаптация навигационной панели для мобильных */
     .top-navigation {
-        height: 32px;
-        padding: 0 5px;
+        height: calc(32px + env(safe-area-inset-top, 0px));
+        padding: env(safe-area-inset-top, 0px) 5px 0;
     }
 
     /* Меньший scroll offset для мобильных */
@@ -1762,11 +1760,11 @@ h6 {
     }
 
     body {
-        padding-top: 32px;
+        padding-top: calc(32px + env(safe-area-inset-top, 0px));
     }
 
     html {
-        scroll-padding-top: 32px;
+        scroll-padding-top: calc(32px + env(safe-area-inset-top, 0px));
     }
 
     .block-separator {
@@ -1875,15 +1873,11 @@ h6 {
     }
 
     .cta-button {
-        width: auto;
-        padding: 15px 30px;
-        font-size: 1rem;
-        border-radius: 0 40px 40px 0;
-        top: 50%;
-        left: 0;
-        bottom: auto;
-        right: auto;
-        transform: translateY(-50%);
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        left: calc(16px + env(safe-area-inset-left, 0px));
+        padding: 12px 24px;
+        font-size: 0.8rem;
+        border-radius: 50px;
     }
 
     .form-container {
@@ -2095,13 +2089,13 @@ h6 {
         letter-spacing: 0.3px;
     }
 
-    /* Adjust padding for taller mobile nav */
+    /* Adjust padding for taller mobile nav + safe area */
     html {
-        scroll-padding-top: 50px;
+        scroll-padding-top: calc(50px + env(safe-area-inset-top, 0px));
     }
 
     body {
-        padding-top: 50px;
+        padding-top: calc(50px + env(safe-area-inset-top, 0px));
     }
 
     .marquee span {
@@ -2115,15 +2109,17 @@ h6 {
     }
 
     .cta-button {
-        width: 100%;
-        padding: 21px 37px;
-        font-size: 1.5rem;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        left: calc(12px + env(safe-area-inset-left, 0px));
+        padding: 17px 30px;
+        font-size: 1.2rem;
+        border-radius: 50px;
     }
 
     /* Navigation Mobile */
     .top-navigation {
-        height: 50px;
-        /* Increased height for touch */
+        height: calc(50px + env(safe-area-inset-top, 0px));
+        padding: env(safe-area-inset-top, 0px) 10px 0;
         justify-content: center;
         /* Remove overflow from parent to allow child to control scroll */
     }

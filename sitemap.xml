@@ -18,4 +18,20 @@
         <priority>0.3</priority>
     </url>
     
+    <!-- Согласие на обработку персональных данных -->
+    <url>
+        <loc>https://detalidekora.ru/consent-for-personal-data.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Согласие на передачу персональных данных третьим лицам -->
+    <url>
+        <loc>https://detalidekora.ru/consent-for-data-transfer.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
 </urlset>

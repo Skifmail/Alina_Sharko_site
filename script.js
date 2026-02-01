@@ -271,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const budgetInput = document.getElementById('budget');
     const commentsInput = document.getElementById('comments');
     const consentCheckbox = document.getElementById('consent');
+    const consentTelegramCheckbox = document.getElementById('consentTelegram');
     const submitButton = document.querySelector('.submit-cta-button');
     const calendarIcon = document.querySelector('.calendar-icon');
 
@@ -281,13 +282,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateFormProgress() {
         if (!progressFill || !progressPercent) return;
 
-        // Обязательные поля: телефон, дата, email, бюджет, согласие
+        // Обязательные поля: телефон, дата, email, бюджет, согласие на обработку, согласие на передачу
         const requiredFields = [
             { element: phoneInput, minLength: 18 }, // +7 (000) 000-00-00
             { element: dateInput, minLength: 10 },  // ДД.ММ.ГГГГ
             { element: emailInput, minLength: 5 },
             { element: budgetInput, minLength: 1 },
-            { element: consentCheckbox, type: 'checkbox' }
+            { element: consentCheckbox, type: 'checkbox' },
+            { element: consentTelegramCheckbox, type: 'checkbox' }
         ];
 
         let filledCount = 0;
@@ -314,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (emailInput) emailInput.addEventListener('input', updateFormProgress);
     if (budgetInput) budgetInput.addEventListener('input', updateFormProgress);
     if (consentCheckbox) consentCheckbox.addEventListener('change', updateFormProgress);
+    if (consentTelegramCheckbox) consentTelegramCheckbox.addEventListener('change', updateFormProgress);
 
     // Инициальная проверка
     updateFormProgress();
@@ -469,6 +472,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!consentCheckbox.checked) {
                 alert('Необходимо дать согласие на обработку персональных данных');
+                return;
+            }
+            if (!consentTelegramCheckbox.checked) {
+                alert('Необходимо дать согласие на передачу персональных данных с использованием мессенджера Telegram');
                 return;
             }
 

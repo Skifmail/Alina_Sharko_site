@@ -281,7 +281,7 @@ h6 {
 /* Красная кнопка - фиксирована в левом нижнем углу */
 .cta-button {
     position: fixed;
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     left: calc(24px + env(safe-area-inset-left, 0px));
     z-index: 10000;
     background-color: #b30000;
@@ -1601,7 +1601,7 @@ h6 {
     }
 
     .cta-button {
-        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
         left: calc(20px + env(safe-area-inset-left, 0px));
         padding: 22px 42px;
         font-size: clamp(1.08rem, 2.4vw, 1.56rem);
@@ -1881,7 +1881,7 @@ h6 {
     }
 
     .cta-button {
-        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
         left: calc(16px + env(safe-area-inset-left, 0px));
         padding: 12px 24px;
         font-size: 0.8rem;
@@ -2117,7 +2117,7 @@ h6 {
     }
 
     .cta-button {
-        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(6px + env(safe-area-inset-bottom, 0px));
         left: calc(12px + env(safe-area-inset-left, 0px));
         padding: 17px 30px;
         font-size: 1.2rem;

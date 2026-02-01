@@ -1,8 +1,8 @@
 // ============================================
 // TELEGRAM BOT CONFIGURATION
 // ============================================
-const BOT_TOKEN = '8551578282:AAGxkMgLLsVztcweq1pnc7nkYX4Pyn62OXY';
-const CHAT_ID = '847497161'; // Замените на ваш Chat ID (получить можно командой /start боту @userinfobot)
+const BOT_TOKEN = 'ваш токен';
+const CHAT_ID = 'ваш chat id'; // Замените на ваш Chat ID (получить можно командой /start боту @userinfobot)
 
 // Функция отправки сообщения в Telegram
 async function sendToTelegram(formData) {

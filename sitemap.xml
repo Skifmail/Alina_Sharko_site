@@ -4,7 +4,7 @@
     
     <!-- Главная страница -->
     <url>
-        <loc>https://detalidekora.ru/</loc>
+        <loc>https://ostorozhno-detali.ru/</loc>
         <lastmod>2025-12-29</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -12,7 +12,7 @@
     
     <!-- Политика конфиденциальности -->
     <url>
-        <loc>https://detalidekora.ru/privacy-policy.html</loc>
+        <loc>https://ostorozhno-detali.ru/privacy-policy.html</loc>
         <lastmod>2025-12-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
@@ -20,7 +20,7 @@
     
     <!-- Согласие на обработку персональных данных -->
     <url>
-        <loc>https://detalidekora.ru/consent-for-personal-data.html</loc>
+        <loc>https://ostorozhno-detali.ru/consent-for-personal-data.html</loc>
         <lastmod>2026-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
@@ -28,7 +28,7 @@
     
     <!-- Согласие на передачу персональных данных третьим лицам -->
     <url>
-        <loc>https://detalidekora.ru/consent-for-data-transfer.html</loc>
+        <loc>https://ostorozhno-detali.ru/consent-for-data-transfer.html</loc>
         <lastmod>2026-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>

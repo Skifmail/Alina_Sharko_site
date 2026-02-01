@@ -2,19 +2,5 @@
 User-agent: *
 Allow: /
 
-# Запрещаем индексацию служебных файлов
-Disallow: /privacy-policy.html
-
 # Указываем путь к карте сайта
-Sitemap: https://detalidekora.ru/sitemap.xml
-
-# Специальные правила для Яндекса
-User-agent: Yandex
-Allow: /
-
-# Специальные правила для Google
-User-agent: Googlebot
-Allow: /
-
-# Задержка между запросами (в секундах)
-Crawl-delay: 1
+Sitemap: https://ostorozhno-detali.ru/sitemap.xml

@@ -6,11 +6,12 @@
 
 ## Что нужно настроить после размещения на хостинге:
 
-### 1. Обновить домен в файлах
-Замените `https://your-domain.com` на ваш реальный домен во всех файлах:
-- `index.html` (множество мест)
-- `robots.txt` (строка Sitemap)
+### 1. Домен сайта
+Домен **ostorozhno-detali.ru** уже указан в:
+- `index.html` (Open Graph, canonical, Schema.org)
+- `robots.txt` (Sitemap)
 - `sitemap.xml` (все URL)
+- `script.js` (текст уведомления о заявке)
 
 ### 2. Яндекс.Метрика
 1. Зарегистрируйтесь на https://metrika.yandex.ru/
@@ -109,7 +110,7 @@
 - Добавьте больше уникального текста на страницу
 
 ## Чек-лист перед запуском:
-- [ ] Заменить все `your-domain.com` на реальный домен
+- [x] Домен ostorozhno-detali.ru указан во всех файлах
 - [ ] Настроить Яндекс.Метрику
 - [ ] Настроить Google Analytics
 - [ ] Верифицировать в Google Search Console

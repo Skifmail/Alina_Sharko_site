@@ -54,6 +54,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(38px + env(safe-area-inset-top, 0px));
+    overflow-x: hidden;
 }
 
 body {
@@ -485,17 +486,21 @@ h6 {
 .block-3 {
     min-height: auto;
     width: 100%;
+    max-width: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
 }
 
-/* Карусель */
+/* Карусель — обрезка по ширине, слайды «выезжают» с правого края */
 .carousel-container {
     height: 35vh;
     width: 100%;
-    overflow: visible;
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: visible;
     position: relative;
     margin-top: 0;
     padding: 10px 0;
@@ -1783,12 +1788,18 @@ h6 {
     /* Block Reset for Mobile */
     .block-1,
     .block-2,
-    .block-3,
     .block-4,
     .block-5 {
         height: auto !important;
         min-height: 100vh;
         overflow: visible !important;
+    }
+
+    .block-3 {
+        height: auto !important;
+        min-height: 100vh;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
     }
 
     .block-1 {
@@ -1858,6 +1869,11 @@ h6 {
         margin-top: 0;
         padding: 0;
         position: static;
+    }
+
+    .carousel-container {
+        overflow-x: hidden;
+        max-width: 100vw;
     }
 
     .carousel-track {

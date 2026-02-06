@@ -215,22 +215,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // БЛОК 3: КАРУСЕЛЬ И МОДАЛЬНОЕ ОКНО
 // ============================================
 
-// Модальное окно для просмотра изображений
+// Модальное окно для просмотра изображений карусели (делегирование — карусель заполняется из JSON)
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.modal-close');
-    const carouselImages = document.querySelectorAll('.carousel-image');
-    
-    // Открытие модального окна при клике на изображение
-    carouselImages.forEach(img => {
-        img.addEventListener('click', function(e) {
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (carouselContainer) {
+        carouselContainer.addEventListener('click', function(e) {
+            const img = e.target.closest('.carousel-image');
+            if (!img || !modal || !modalImg) return;
             e.stopPropagation();
             modal.style.display = 'block';
-            modalImg.src = this.src;
-            document.body.style.overflow = 'hidden'; // Отключаем прокрутку страницы
+            modalImg.src = img.src;
+            modalImg.alt = img.alt || '';
+            document.body.style.overflow = 'hidden';
         });
-    });
+    }
     
     // Закрытие по клику на крестик
     if (closeBtn) {
@@ -524,10 +526,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================
-    // ГАЛЕРЕЯ ПРОЕКТОВ (БЛОК 5)
+    // ГАЛЕРЕЯ ПРОЕКТОВ (БЛОК 5) — данные из content.json (contentReady)
     // ============================================
     
-    const projectItems = document.querySelectorAll('.project-item');
     const galleryModal = document.getElementById('project-gallery-modal');
     const galleryImage = document.getElementById('gallery-image');
     const galleryClose = document.querySelector('.gallery-close');
@@ -543,33 +544,26 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentImageIndex = 0;
     let projectImages = [];
     
-    // Определяем количество фотографий в каждом проекте
-    const projectPhotoCounts = {
-        '1': 10, 
-        '2': 10,  
-        '3': 10,  
-        '4': 10,  
-        '5': 10,  
-        '6': 10   
-    };
-    
-    // Открытие галереи проекта
-    projectItems.forEach(item => {
-        item.addEventListener('click', function() {
-            currentProject = this.getAttribute('data-project');
-            const photoCount = projectPhotoCounts[currentProject] || 10;
-            
-            // Формируем массив путей к фотографиям проекта
-            projectImages = [];
-            for (let i = 1; i <= photoCount; i++) {
-                projectImages.push(`images/projects/project_${currentProject}/${i}.jpeg`);
+    function initProjectGallery() {
+        const grid = document.querySelector('.projects-grid');
+        if (!grid || !galleryModal) return;
+        grid.addEventListener('click', function(e) {
+            const item = e.target.closest('.project-item');
+            if (!item) return;
+            currentProject = item.getAttribute('data-project');
+            const projects = window.__contentProjects;
+            if (projects && Array.isArray(projects)) {
+                const proj = projects.find(p => String(p.id) === String(currentProject));
+                projectImages = (proj && proj.gallery) ? proj.gallery.slice() : [];
+            } else {
+                projectImages = [];
             }
-            
-            // Отображаем сетку фотографий
             showGalleryGrid();
             galleryModal.classList.add('active');
         });
-    });
+    }
+    
+    document.addEventListener('contentReady', initProjectGallery);
     
     // Показать сетку фотографий
     function showGalleryGrid() {

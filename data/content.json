@@ -1,0 +1,98 @@
+{
+  "seo": {
+    "title": "Студия Декора Алины Шарко | Оформление Свадеб и Мероприятий",
+    "description": "Студия декора Алины Шарко - профессиональное оформление мероприятий.",
+    "keywords": "декор мероприятий, оформление свадеб, студия декора, декор праздников, Алина Шарко, event декор",
+    "og_title": "Студия Декора Алины Шарко - Профессиональное Оформление Мероприятий",
+    "og_description": "Эксклюзивное оформление мероприятий. Превратим ваше торжество в незабываемое событие.",
+    "og_image": "images/og-image.jpg",
+    "twitter_title": "Студия Декора Алины Шарко",
+    "twitter_description": "Профессиональное оформление мероприятий",
+    "twitter_image": "images/og-image.jpg",
+    "schema_name": "Студия Декора Алины Шарко",
+    "schema_description": "Профессиональное оформление мероприятий",
+    "schema_telephone": "+7-XXX-XXX-XX-XX",
+    "schema_address": "Москва",
+    "schema_priceRange": "$$$",
+    "schema_openingHours": "Mo-Su 09:00-21:00",
+    "schema_instagram": "https://www.instagram.com/alina_sharko"
+  },
+  "block1": {
+    "top_bar_text": "ДЕКОР СО СТИЛЕМ И ЕБАНЦОЙ...",
+    "led_text": "ОСТОРОЖНО ДЕТАЛИ!!!",
+    "cta_button_text": "ОСТАВИТЬ ЗАЯВКУ",
+    "hero_image": "images/block_1.jpeg"
+  },
+  "block2": {
+    "title_line1": "КТО МЫ ТАКИЕ?",
+    "title_line2": "ЗАЧЕМ МЫ ЗДЕСЬ?",
+    "title_line3": "КУДА МЫ ИДЁМ?",
+    "text1": "Мы – художники, превращающие пространство в эмоции. Мы слушаем истории людей – о любви, о чувствах, о желаниях и переводим их на язык фактур, цвета и света и ароматов. Мы здесь, чтобы делать невидимое – осязаемым и дарим людям остановленные мгновения",
+    "text2": "Мы стремимся к созданию новой парадигмы в декоре, где нет места однообразности, а есть место искусству, мы хотим создавать не просто декор, а узнаваемые арт-объекты и фантазийные миры",
+    "text3": "А если на простом земном, то: опыт работы 11 лет, работаем с бюджетами от 300 т.р., собственное производство, постоянная развивающаяся команда и отменное чувство юмора",
+    "left_image": "images/Block_2_left.jpg",
+    "left_image_alt": "Оформление мероприятия студией декора Алины Шарко",
+    "right_image": "images/Block_2_right.JPG",
+    "right_image_alt": "Процесс создания декора для праздника"
+  },
+  "carousel": [
+    {"src": "images/carousel_1.jpeg", "alt": "Декор 1"},
+    {"src": "images/carousel_2.jpeg", "alt": "Декор 2"},
+    {"src": "images/carousel_3.jpeg", "alt": "Декор 3"},
+    {"src": "images/carousel_4.jpeg", "alt": "Декор 4"},
+    {"src": "images/carousel_5.jpeg", "alt": "Декор 5"},
+    {"src": "images/carousel_6.jpeg", "alt": "Декор 6"},
+    {"src": "images/carousel_7.jpeg", "alt": "Декор 7"},
+    {"src": "images/carousel_8.jpeg", "alt": "Декор 8"},
+    {"src": "images/carousel_9.jpeg", "alt": "Декор 9"},
+    {"src": "images/carousel_10.jpeg", "alt": "Декор 10"},
+    {"src": "images/carousel_11.jpeg", "alt": "Декор 11"}
+  ],
+  "block3": {
+    "title": "ОФОРМЛЕНИЕ МЕРОПРИЯТИЙ ПОД КЛЮЧ",
+    "subtitle": "Мы делаем всё - от консультации до монтажа. Вам - только наслаждаться праздником!",
+    "workflow_steps": ["ВСТРЕЧА/ЗНАКОМСТВО", "РАЗРАБОТКА КОНЦЕПЦИИ", "ПОДПИСАНИЕ ДОГОВОРА", "ЭСКИЗЫ", "СОГЛАСОВАНИЕ СМЕТЫ", "ПОДГОТОВКА ПРОЕКТА", "РЕАЛИЗАЦИЯ"],
+    "bottom_image1": "images/block_3.jpeg",
+    "bottom_image1_alt": "Пример декора свадебного зала",
+    "bottom_image2": "images/block_3_1.JPG",
+    "bottom_image2_alt": "Оформление праздничного пространства"
+  },
+  "block4": {
+    "top_image": "images/block_4.jpeg",
+    "top_image_alt": "Примеры декора мероприятий от студии Алины Шарко",
+    "title": "ОСТАВИТЬ ЗАЯВКУ",
+    "form_intro": "Вы можете написать нам напрямую или оставить заявку и мы свяжемся с вами!",
+    "submit_button_text": "ДАВАЙТЕ ОБСУДИМ ВАШ ДЕКОР"
+  },
+  "block5": {
+    "title": "НАШИ РЕАЛЬНЫЕ ПРОЕКТЫ",
+    "marquee_top": "ОСТОРОЖНО!!!",
+    "marquee_bottom": "ДЕТАЛИ!!!",
+    "projects": [
+      {"id": 1, "title": "Проект 1", "cover": "images/projects/project_1.jpeg", "cover_alt": "Свадебный декор - Проект 1", "gallery": ["images/projects/project_1/1.jpeg", "images/projects/project_1/2.jpeg", "images/projects/project_1/3.jpeg", "images/projects/project_1/4.jpeg", "images/projects/project_1/5.jpeg", "images/projects/project_1/6.jpeg", "images/projects/project_1/7.jpeg", "images/projects/project_1/8.jpeg", "images/projects/project_1/9.jpeg", "images/projects/project_1/10.jpeg"]},
+      {"id": 2, "title": "Проект 2", "cover": "images/projects/project_2.jpeg", "cover_alt": "Праздничное оформление - Проект 2", "gallery": ["images/projects/project_2/1.jpeg", "images/projects/project_2/2.jpeg", "images/projects/project_2/3.jpeg", "images/projects/project_2/4.jpeg", "images/projects/project_2/5.jpeg", "images/projects/project_2/6.jpeg", "images/projects/project_2/7.jpeg", "images/projects/project_2/8.jpeg", "images/projects/project_2/9.jpeg", "images/projects/project_2/10.jpeg"]},
+      {"id": 3, "title": "Проект 3", "cover": "images/projects/project_3.jpeg", "cover_alt": "Декор мероприятия - Проект 3", "gallery": ["images/projects/project_3/1.jpeg", "images/projects/project_3/2.jpeg", "images/projects/project_3/3.jpeg", "images/projects/project_3/4.jpeg", "images/projects/project_3/5.jpeg", "images/projects/project_3/6.jpeg", "images/projects/project_3/7.jpeg", "images/projects/project_3/8.jpeg", "images/projects/project_3/9.jpeg", "images/projects/project_3/10.jpeg"]},
+      {"id": 4, "title": "Проект 4", "cover": "images/projects/project_4.jpeg", "cover_alt": "Оформление торжества - Проект 4", "gallery": ["images/projects/project_4/1.jpeg", "images/projects/project_4/2.jpeg", "images/projects/project_4/3.jpeg", "images/projects/project_4/4.jpeg", "images/projects/project_4/5.jpeg", "images/projects/project_4/6.jpeg", "images/projects/project_4/7.jpeg", "images/projects/project_4/8.jpeg", "images/projects/project_4/9.jpeg", "images/projects/project_4/10.jpeg"]},
+      {"id": 5, "title": "Проект 5", "cover": "images/projects/project_5.jpeg", "cover_alt": "Праздничный декор - Проект 5", "gallery": ["images/projects/project_5/1.jpeg", "images/projects/project_5/2.jpeg", "images/projects/project_5/3.jpeg", "images/projects/project_5/4.jpeg", "images/projects/project_5/5.jpeg", "images/projects/project_5/6.jpeg", "images/projects/project_5/7.jpeg", "images/projects/project_5/8.jpeg", "images/projects/project_5/9.jpeg", "images/projects/project_5/10.jpeg"]},
+      {"id": 6, "title": "Проект 6", "cover": "images/projects/project_6.jpeg", "cover_alt": "Свадебное оформление - Проект 6", "gallery": ["images/projects/project_6/1.jpeg", "images/projects/project_6/2.jpeg", "images/projects/project_6/3.jpeg", "images/projects/project_6/4.jpeg", "images/projects/project_6/5.jpeg", "images/projects/project_6/6.jpeg", "images/projects/project_6/7.jpeg", "images/projects/project_6/8.jpeg", "images/projects/project_6/9.jpeg", "images/projects/project_6/10.jpeg"]}
+    ]
+  },
+  "block6": {
+    "title": "Мы в INSTAGRAM*",
+    "subtitle": "ЕЖЕДНЕВНЫЙ ЗАРЯД ВДОХНОВЕНИЯ",
+    "disclaimer": "* Instagram принадлежит компании Meta Platforms Inc., которая признана экстремистской организацией и запрещена на территории РФ"
+  },
+  "footer": {
+    "brand": "ОСТОРОЖНО ДЕТАЛИ",
+    "credits": "Разработка и поддержка сайта",
+    "credits_link": "https://www.aleks-shataylo.ru",
+    "credits_link_text": "SKIFMAIL",
+    "year": "2026"
+  },
+  "cookie": {
+    "text_before": "Этот сайт использует файлы cookie для улучшения работы и повышения эффективности сайта. Продолжая использование сайта, вы соглашаетесь с использованием файлов cookie и",
+    "link_text": "Политикой обработки персональных данных",
+    "accept": "Принять",
+    "decline": "Отказаться"
+  }
+}

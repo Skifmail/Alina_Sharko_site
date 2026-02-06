@@ -20,7 +20,7 @@
     <meta property="og:url" content="https://ostorozhno-detali.ru/">
     <meta property="og:title" content="Студия Декора Алины Шарко - Профессиональное Оформление Мероприятий">
     <meta property="og:description"
-        content="Эксклюзивное оформление свадеб, праздников и мероприятий. Превратим ваше торжество в незабываемое событие.">
+        content="Эксклюзивное оформление мероприятий. Превратим ваше торжество в незабываемое событие.">
     <meta property="og:image" content="https://ostorozhno-detali.ru/images/og-image.jpg">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="Студия Декора Алины Шарко">
@@ -39,7 +39,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <title>Студия Декора Алины Шарко | Оформление Свадеб и Мероприятий</title>
+    <title data-content="seo.title">Студия Декора Алины Шарко | Оформление мероприятий</title>
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,24 +136,24 @@
     <section id="block-1" class="block-1">
         <!-- Белая полоска с текстом (15%) -->
         <div class="top-bar">
-            <p>ДЕКОР СО СТИЛЕМ И ЕБАНЦОЙ...</p>
+            <p data-content="block1.top_bar_text">ДЕКОР СО СТИЛЕМ И ЕБАНЦОЙ...</p>
         </div>
 
         <!-- Бегущая строка LED (25%) -->
         <div class="led-board">
             <div class="led-track">
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
-                <span class="led-text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
+                <span class="led-text" data-content="block1.led_text">ОСТОРОЖНО ДЕТАЛИ!!!</span>
             </div>
         </div>
 
         <!-- Фоновое изображение с кнопкой (60%) -->
         <div class="hero-section">
-            <button class="cta-button" onclick="scrollToForm()">ОСТАВИТЬ ЗАЯВКУ</button>
+            <button class="cta-button" onclick="scrollToForm()" data-content="block1.cta_button_text">ОСТАВИТЬ ЗАЯВКУ</button>
         </div>
     </section>
 
@@ -164,13 +164,13 @@
     <section id="block-2" class="block-2">
         <div class="block-2-content-wrapper">
             <div class="block-2-left-image">
-                <img src="images/Block_2_left.jpg" alt="Оформление мероприятия студией декора Алины Шарко"
+                <img data-content-src="block2.left_image" data-content-alt="block2.left_image_alt" src="images/Block_2_left.jpg" alt="Оформление мероприятия студией декора Алины Шарко"
                     loading="lazy">
             </div>
 
             <div class="block-2-right-content">
                 <div class="block-2-right-image">
-                    <img src="images/Block_2_right.JPG" alt="Процесс создания декора для праздника" loading="lazy">
+                    <img data-content-src="block2.right_image" data-content-alt="block2.right_image_alt" src="images/Block_2_right.JPG" alt="Процесс создания декора для праздника" loading="lazy">
                 </div>
 
                 <div class="block-2-text-container">
@@ -183,19 +183,19 @@
                     <p class="block-2-subtitle-text">
                         <br>
                     </p>
-                    <p class="block-2-text">
+                    <p class="block-2-text" data-content="block2.text1">
                         Мы – художники, превращающие пространство в эмоции.
                         Мы слушаем истории людей – о любви, о чувствах, о желаниях и
                         переводим их на язык фактур, цвета и света и ароматов. Мы здесь,
                         чтобы делать невидимое – осязаемым и дарим людям
                         остановленные мгновения
                     </p>
-                    <p class="block-2-text">
+                    <p class="block-2-text" data-content="block2.text2">
                         Мы стремимся к созданию новой парадигмы в декоре, где нет
                         места однообразности, а есть место искусству, мы хотим создавать
                         не просто декор, а узнаваемые арт-объекты и фантазийные миры
                     </p>
-                    <p class="block-2-text">
+                    <p class="block-2-text" data-content="block2.text3">
                         А если на простом земном, то: опыт работы 11 лет, работаем с
                         бюджетами от 300 т.р., собственное производство, постоянная
                         развивающаяся команда и отменное чувство юмора
@@ -210,40 +210,15 @@
 
     <!-- Блок 3: Будет добавлен позже -->
     <section id="block-3" class="block-3">
-        <!-- Карусель фотографий -->
+        <!-- Карусель фотографий (заполняется из content.json) -->
         <div class="carousel-container">
-            <div class="carousel-track">
-                <img src="images/carousel_1.jpeg" alt="Декор 1" class="carousel-image">
-                <img src="images/carousel_2.jpeg" alt="Декор 2" class="carousel-image">
-                <img src="images/carousel_3.jpeg" alt="Декор 3" class="carousel-image">
-                <img src="images/carousel_4.jpeg" alt="Декор 4" class="carousel-image">
-                <img src="images/carousel_5.jpeg" alt="Декор 5" class="carousel-image">
-                <img src="images/carousel_6.jpeg" alt="Декор 6" class="carousel-image">
-                <img src="images/carousel_7.jpeg" alt="Декор 7" class="carousel-image">
-                <img src="images/carousel_8.jpeg" alt="Декор 8" class="carousel-image">
-                <img src="images/carousel_9.jpeg" alt="Декор 9" class="carousel-image">
-                <img src="images/carousel_10.jpeg" alt="Декор 10" class="carousel-image">
-                <img src="images/carousel_11.jpeg" alt="Декор 11" class="carousel-image">
-                <!-- Дубликат для бесшовной прокрутки -->
-                <img src="images/carousel_1.jpeg" alt="Декор 1" class="carousel-image">
-                <img src="images/carousel_2.jpeg" alt="Декор 2" class="carousel-image">
-                <img src="images/carousel_3.jpeg" alt="Декор 3" class="carousel-image">
-                <img src="images/carousel_4.jpeg" alt="Декор 4" class="carousel-image">
-                <img src="images/carousel_5.jpeg" alt="Декор 5" class="carousel-image">
-                <img src="images/carousel_6.jpeg" alt="Декор 6" class="carousel-image">
-                <img src="images/carousel_7.jpeg" alt="Декор 7" class="carousel-image">
-                <img src="images/carousel_8.jpeg" alt="Декор 8" class="carousel-image">
-                <img src="images/carousel_9.jpeg" alt="Декор 9" class="carousel-image">
-                <img src="images/carousel_10.jpeg" alt="Декор 10" class="carousel-image">
-                <img src="images/carousel_11.jpeg" alt="Декор 11" class="carousel-image">
-            </div>
+            <div class="carousel-track"></div>
         </div>
 
         <!-- Текстовый блок -->
         <div class="block-3-text-section">
-            <h2 class="block-3-title">ОФОРМЛЕНИЕ МЕРОПРИЯТИЙ ПОД КЛЮЧ</h2>
-            <p class="block-3-subtitle">Мы делаем всё - от консультации до монтажа. Вам - только наслаждаться
-                праздником!</p>
+            <h2 class="block-3-title" data-content="block3.title">ОФОРМЛЕНИЕ МЕРОПРИЯТИЙ ПОД КЛЮЧ</h2>
+            <p class="block-3-subtitle" data-content="block3.subtitle">Мы делаем всё - от консультации до монтажа. Вам - только наслаждаться праздником!</p>
             <div class="block-3-workflow">
                 <span class="workflow-step">ВСТРЕЧА/ЗНАКОМСТВО</span>
                 <span class="workflow-arrow">→</span>
@@ -264,10 +239,10 @@
         <!-- Нижнее изображение -->
         <div class="block-3-bottom-images">
             <div class="block-3-bottom-image">
-                <img src="images/block_3.jpeg" alt="Пример декора свадебного зала" loading="lazy">
+                <img data-content-src="block3.bottom_image1" data-content-alt="block3.bottom_image1_alt" src="images/block_3.jpeg" alt="Пример декора свадебного зала" loading="lazy">
             </div>
             <div class="block-3-bottom-image">
-                <img src="images/block_3_1.JPG" alt="Оформление праздничного пространства" loading="lazy">
+                <img data-content-src="block3.bottom_image2" data-content-alt="block3.bottom_image2_alt" src="images/block_3_1.JPG" alt="Оформление праздничного пространства" loading="lazy">
             </div>
         </div>
     </section>
@@ -285,15 +260,15 @@
     <section id="block-4" class="block-4">
         <!-- Верхнее изображение -->
         <div class="block-4-top-image">
-            <img src="images/block_4.jpeg" alt="Примеры декора мероприятий от студии Алины Шарко" loading="lazy">
+            <img data-content-src="block4.top_image" data-content-alt="block4.top_image_alt" src="images/block_4.jpeg" alt="Примеры декора мероприятий от студии Алины Шарко" loading="lazy">
         </div>
 
         <!-- Заголовок блока -->
-        <h2 class="block-4-title">ОСТАВИТЬ ЗАЯВКУ</h2>
+        <h2 class="block-4-title" data-content="block4.title">ОСТАВИТЬ ЗАЯВКУ</h2>
 
         <!-- Форма обратной связи -->
         <div class="block-4-form-container">
-            <p class="form-intro-text">Вы можете написать нам напрямую или оставить заявку и мы свяжемся с вами!</p>
+            <p class="form-intro-text" data-content="block4.form_intro">Вы можете написать нам напрямую или оставить заявку и мы свяжемся с вами!</p>
 
             <!-- Прогресс-бар заполнения формы -->
             <div class="form-progress-container">
@@ -362,7 +337,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="submit-cta-button">ДАВАЙТЕ ОБСУДИМ ВАШ ДЕКОР</button>
+                <button type="submit" class="submit-cta-button" data-content="block4.submit_button_text">ДАВАЙТЕ ОБСУДИМ ВАШ ДЕКОР</button>
             </form>
         </div>
     </section>
@@ -370,79 +345,27 @@
     <!-- Separator -->
     <div class="block-separator"></div>
 
-    <!-- Block 5 - Projects Gallery -->
+    <!-- Block 5 - Projects Gallery (сетка заполняется из content.json) -->
     <section id="block-5" class="block-5">
-        <h2 class="block-5-title">НАШИ РЕАЛЬНЫЕ ПРОЕКТЫ</h2>
+        <h2 class="block-5-title" data-content="block5.title">НАШИ РЕАЛЬНЫЕ ПРОЕКТЫ</h2>
 
         <!-- Marquee with stacked text -->
         <div class="block-5-marquee-container">
             <div class="block-5-marquee">
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
-                <span class="block-5-marquee-text">
-                    <span class="marquee-top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom">ДЕТАЛИ!!!</span>
-                </span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
+                <span class="block-5-marquee-text"><span class="marquee-top" data-content="block5.marquee_top">ОСТОРОЖНО!!!</span><br><span class="marquee-bottom" data-content="block5.marquee_bottom">ДЕТАЛИ!!!</span></span>
             </div>
         </div>
 
-        <!-- Projects Grid -->
-        <div class="projects-grid">
-            <div class="project-item" data-project="1">
-                <img src="images/projects/project_1.jpeg" alt="Свадебный декор - Проект 1" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 1</p>
-            </div>
-            <div class="project-item" data-project="2">
-                <img src="images/projects/project_2.jpeg" alt="Праздничное оформление - Проект 2" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 2</p>
-            </div>
-            <div class="project-item" data-project="3">
-                <img src="images/projects/project_3.jpeg" alt="Декор мероприятия - Проект 3" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 3</p>
-            </div>
-            <div class="project-item" data-project="4">
-                <img src="images/projects/project_4.jpeg" alt="Оформление торжества - Проект 4" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 4</p>
-            </div>
-            <div class="project-item" data-project="5">
-                <img src="images/projects/project_5.jpeg" alt="Праздничный декор - Проект 5" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 5</p>
-            </div>
-            <div class="project-item" data-project="6">
-                <img src="images/projects/project_6.jpeg" alt="Свадебное оформление - Проект 6" class="project-cover"
-                    loading="lazy">
-                <p class="project-caption">Проект 6</p>
-            </div>
-        </div>
+        <div class="projects-grid"></div>
     </section>
 
     <!-- Separator -->
@@ -450,8 +373,8 @@
 
     <!-- Block 6 - Instagram Section -->
     <section id="block-6" class="block-6">
-        <h3 class="instagram-title">Мы в INSTAGRAM*</h3>
-        <p class="instagram-subtitle">ЕЖЕДНЕВНЫЙ ЗАРЯД ВДОХНОВЕНИЯ</p>
+        <h3 class="instagram-title"><a class="instagram-title-link" href="#" data-content-href="seo.schema_instagram" data-content="block6.title" target="_blank" rel="noopener noreferrer">Мы в INSTAGRAM*</a></h3>
+        <p class="instagram-subtitle" data-content="block6.subtitle">ЕЖЕДНЕВНЫЙ ЗАРЯД ВДОХНОВЕНИЯ</p>
 
         <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
         <div class="instagram-embed-wrap">
@@ -459,9 +382,8 @@
             <div class="elfsight-app-bd39b4e0-da51-4ff9-bed6-e0cad7a4d7e0" data-elfsight-app-lazy></div>
         </div>
 
-        <p class="instagram-disclaimer">
-            * Instagram принадлежит компании Meta Platforms Inc., которая признана экстремистской организацией и
-            запрещена на территории РФ
+        <p class="instagram-disclaimer" data-content="block6.disclaimer">
+            * Instagram принадлежит компании Meta Platforms Inc., которая признана экстремистской организацией и запрещена на территории РФ
         </p>
     </section>
 
@@ -501,14 +423,12 @@
     <div id="cookie-banner" class="cookie-banner">
         <div class="cookie-content">
             <p class="cookie-text">
-                Этот сайт использует файлы cookie для улучшения работы и повышения эффективности сайта.
-                Продолжая использование сайта, вы соглашаетесь с использованием файлов cookie и
-                <a href="privacy-policy.html" target="_blank" class="cookie-link">Политикой обработки персональных
-                    данных</a>.
+                <span data-content="cookie.text_before">Этот сайт использует файлы cookie для улучшения работы и повышения эффективности сайта. Продолжая использование сайта, вы соглашаетесь с использованием файлов cookie и</span>
+                <a href="privacy-policy.html" target="_blank" class="cookie-link"><span data-content="cookie.link_text">Политикой обработки персональных данных</span></a>.
             </p>
             <div class="cookie-buttons">
-                <button id="cookie-accept" class="cookie-btn cookie-accept">Принять</button>
-                <button id="cookie-decline" class="cookie-btn cookie-decline">Отказаться</button>
+                <button id="cookie-accept" class="cookie-btn cookie-accept" data-content="cookie.accept">Принять</button>
+                <button id="cookie-decline" class="cookie-btn cookie-decline" data-content="cookie.decline">Отказаться</button>
             </div>
         </div>
     </div>
@@ -516,10 +436,9 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-content">
-            <p class="footer-brand">ОСТОРОЖНО ДЕТАЛИ</p>
+            <p class="footer-brand" data-content="footer.brand">ОСТОРОЖНО ДЕТАЛИ</p>
             <p class="footer-credits">
-                Разработка и поддержка сайта <a href="https://www.aleks-shataylo.ru" target="_blank"
-                    rel="noopener noreferrer" class="footer-link">SKIFMAIL</a>, 2026
+                <span data-content="footer.credits">Разработка и поддержка сайта</span> <a href="#" data-content-href="footer.credits_link" target="_blank" rel="noopener noreferrer" class="footer-link"><span data-content="footer.credits_link_text">SKIFMAIL</span></a>, <span data-content="footer.year">2026</span>
             </p>
             <p class="footer-policy">
                 <a href="privacy-policy.html" class="footer-link">Политика в отношении обработки персональных данных</a>
@@ -532,6 +451,7 @@
     </footer>
 
 
+    <script src="assets/js/content-loader.js"></script>
     <script src="script.js"></script>
 </body>
 

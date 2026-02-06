@@ -1245,6 +1245,13 @@ h6 {
     color: #000000;
     letter-spacing: 1px;
 }
+.instagram-title-link {
+    color: inherit;
+    text-decoration: none;
+}
+.instagram-title-link:hover {
+    text-decoration: underline;
+}
 
 .instagram-subtitle {
     font-family: 'Cormorant', serif;

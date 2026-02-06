@@ -1,0 +1,6 @@
+# Редирект с index.html на главную без имени файла (чистый URL)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>

@@ -3,13 +3,22 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=UTF-8');
 
-const SMTP_HOST = 'smtp.spaceweb.ru';
-const SMTP_PORT = 465;
-const SMTP_ENCRYPTION = 'ssl';
-const SMTP_USERNAME = 'info@ostorozhno-detali.ru';
-const SMTP_PASSWORD = 'YU&ZFDFDKB8UNG8u';
-const SMTP_FROM_EMAIL = 'info@ostorozhno-detali.ru';
-const SMTP_FROM_NAME = 'ОСТОРОЖНО!!! ДЕТАЛИ!!!';
+function env_value(string $name, string $default = ''): string
+{
+    $value = getenv($name);
+    if ($value === false || $value === null) {
+        return $default;
+    }
+    return (string)$value;
+}
+
+define('SMTP_HOST', env_value('SMTP_HOST', 'smtp.spaceweb.ru'));
+define('SMTP_PORT', (int)env_value('SMTP_PORT', '465'));
+define('SMTP_ENCRYPTION', env_value('SMTP_ENCRYPTION', 'ssl'));
+define('SMTP_USERNAME', env_value('SMTP_USERNAME', 'info@ostorozhno-detali.ru'));
+define('SMTP_PASSWORD', env_value('SMTP_PASSWORD', ''));
+define('SMTP_FROM_EMAIL', env_value('SMTP_FROM_EMAIL', 'info@ostorozhno-detali.ru'));
+define('SMTP_FROM_NAME', env_value('SMTP_FROM_NAME', 'ОСТОРОЖНО!!! ДЕТАЛИ!!!'));
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -69,10 +78,10 @@ function smtp_command($socket, string $command, array $codes): array {
 }
 
 function smtp_send_mail(string $to, string $subject, string $body, string $replyTo): array {
-    if (SMTP_PASSWORD === 'PASTE_NEW_MAILBOX_PASSWORD_HERE' || SMTP_PASSWORD === '') {
+    if (SMTP_PASSWORD === '') {
         return [
             'ok' => false,
-            'error' => 'Не задан SMTP_PASSWORD в send-request.php',
+            'error' => 'Не задан SMTP_PASSWORD (переменная окружения)',
         ];
     }
 

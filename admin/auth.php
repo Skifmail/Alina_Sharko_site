@@ -5,10 +5,24 @@
  */
 session_start();
 
-define('ADMIN_LOGIN', 'admin');
-define('ADMIN_PASS', 'OstorozhnoDetali2026!'); // Смените на свой надёжный пароль
+function env_value(string $name, string $default = ''): string
+{
+    $value = getenv($name);
+    if ($value === false || $value === null) {
+        return $default;
+    }
+    return (string)$value;
+}
+
+define('ADMIN_LOGIN', env_value('ADMIN_LOGIN', 'admin'));
+define('ADMIN_PASS', env_value('ADMIN_PASS', ''));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (ADMIN_PASS === '') {
+        header('Location: index.php?error=1');
+        exit;
+    }
+
     $login = $_POST['login'] ?? '';
     $pass  = $_POST['pass'] ?? '';
     if ($login === ADMIN_LOGIN && $pass === ADMIN_PASS) {

@@ -19,8 +19,35 @@ unset($_SESSION['admin_ok'], $_SESSION['admin_error']);
 $seo = $data['seo'] ?? [];
 $b1 = $data['block1'] ?? [];
 $b2 = $data['block2'] ?? [];
+$b2Image = $b2['image'] ?? $b2['right_image'] ?? $b2['left_image'] ?? '';
+$b2ImageAlt = $b2['image_alt'] ?? $b2['right_image_alt'] ?? $b2['left_image_alt'] ?? '';
 $carousel = $data['carousel'] ?? [];
 $b3 = $data['block3'] ?? [];
+$b3Gallery = $b3['bottom_gallery'] ?? [];
+if (!$b3Gallery) {
+    $legacyImages = [
+        ['src' => $b3['bottom_image'] ?? '', 'alt' => $b3['bottom_image_alt'] ?? ''],
+        ['src' => 'images/block3-1.png', 'alt' => 'Фото блока 3'],
+        ['src' => 'images/block3-2.png', 'alt' => 'Фото блока 3'],
+        ['src' => 'images/block3-3.png', 'alt' => 'Фото блока 3'],
+    ];
+    $b3Gallery = array_values(array_filter($legacyImages, function($item) {
+        return !empty($item['src']);
+    }));
+}
+$b3Gallery = array_pad($b3Gallery, 4, ['src' => '', 'alt' => '']);
+$b3MobileGallery = $b3['bottom_gallery_mobile'] ?? [];
+if (!$b3MobileGallery) {
+    $b3MobileGallery = [
+        ['src' => 'images/block3mob1.jpeg', 'alt' => 'Мобильное фото блока 3 1'],
+        ['src' => 'images/block3mob2.jpeg', 'alt' => 'Мобильное фото блока 3 2'],
+        ['src' => 'images/block3mob3.jpeg', 'alt' => 'Мобильное фото блока 3 3'],
+        ['src' => 'images/block3mob4.jpeg', 'alt' => 'Мобильное фото блока 3 4'],
+        ['src' => 'images/block3mob5.jpeg', 'alt' => 'Мобильное фото блока 3 5'],
+        ['src' => 'images/block3mob6.jpeg', 'alt' => 'Мобильное фото блока 3 6'],
+    ];
+}
+$b3MobileGallery = array_pad($b3MobileGallery, 6, ['src' => '', 'alt' => '']);
 $b4 = $data['block4'] ?? [];
 $b5 = $data['block5'] ?? [];
 $b6 = $data['block6'] ?? [];
@@ -100,12 +127,9 @@ $projects = $b5['projects'] ?? [];
             <div class="row"><label>Текст 1</label><textarea id="b2_text1"><?= htmlspecialchars($b2['text1'] ?? '') ?></textarea></div>
             <div class="row"><label>Текст 2</label><textarea id="b2_text2"><?= htmlspecialchars($b2['text2'] ?? '') ?></textarea></div>
             <div class="row"><label>Текст 3</label><textarea id="b2_text3"><?= htmlspecialchars($b2['text3'] ?? '') ?></textarea></div>
-            <div class="row"><label>Левое фото (путь)</label><input type="text" id="b2_left_image" value="<?= htmlspecialchars($b2['left_image'] ?? '') ?>"></div>
-            <p><small>Или загрузите новое (рекомендуемый размер: 1200×800 px): <input type="file" id="upload_b2_left" accept="image/*"> <span id="b2_left_upload_status"></span></small></p>
-            <div class="row"><label>Alt левого фото</label><input type="text" id="b2_left_image_alt" value="<?= htmlspecialchars($b2['left_image_alt'] ?? '') ?>"></div>
-            <div class="row"><label>Правое фото (путь)</label><input type="text" id="b2_right_image" value="<?= htmlspecialchars($b2['right_image'] ?? '') ?>"></div>
-            <p><small>Или загрузите новое (рекомендуемый размер: 1200×800 px): <input type="file" id="upload_b2_right" accept="image/*"> <span id="b2_right_upload_status"></span></small></p>
-            <div class="row"><label>Alt правого фото</label><input type="text" id="b2_right_image_alt" value="<?= htmlspecialchars($b2['right_image_alt'] ?? '') ?>"></div>
+            <div class="row"><label>Фото блока (путь)</label><input type="text" id="b2_image" value="<?= htmlspecialchars($b2Image) ?>"></div>
+            <p><small>Или загрузите новое (рекомендуемый размер: 1200×1600 px): <input type="file" id="upload_b2_image" accept="image/*"> <span id="b2_image_upload_status"></span></small></p>
+            <div class="row"><label>Alt фото</label><input type="text" id="b2_image_alt" value="<?= htmlspecialchars($b2ImageAlt) ?>"></div>
         </div>
 
         <div class="sec">
@@ -120,22 +144,25 @@ $projects = $b5['projects'] ?? [];
             <div class="row"><label>Заголовок</label><input type="text" id="b3_title" value="<?= htmlspecialchars($b3['title'] ?? '') ?>"></div>
             <div class="row"><label>Подзаголовок</label><input type="text" id="b3_subtitle" value="<?= htmlspecialchars($b3['subtitle'] ?? '') ?>"></div>
             <div class="row"><label>Этапы (через запятую)</label><input type="text" id="b3_workflow_steps" value="<?= htmlspecialchars(implode(', ', $b3['workflow_steps'] ?? [])) ?>"></div>
-            <div class="row"><label>Нижнее фото 1 (путь)</label><input type="text" id="b3_bottom_image1" value="<?= htmlspecialchars($b3['bottom_image1'] ?? '') ?>"></div>
-            <p><small>Или загрузите новое (рекомендуемый размер: 1200×700 px): <input type="file" id="upload_b3_bottom1" accept="image/*"> <span id="b3_bottom1_upload_status"></span></small></p>
-            <div class="row"><label>Alt</label><input type="text" id="b3_bottom_image1_alt" value="<?= htmlspecialchars($b3['bottom_image1_alt'] ?? '') ?>"></div>
-            <div class="row"><label>Нижнее фото 2 (путь)</label><input type="text" id="b3_bottom_image2" value="<?= htmlspecialchars($b3['bottom_image2'] ?? '') ?>"></div>
-            <p><small>Или загрузите новое (рекомендуемый размер: 1200×700 px): <input type="file" id="upload_b3_bottom2" accept="image/*"> <span id="b3_bottom2_upload_status"></span></small></p>
-            <div class="row"><label>Alt</label><input type="text" id="b3_bottom_image2_alt" value="<?= htmlspecialchars($b3['bottom_image2_alt'] ?? '') ?>"></div>
+            <?php for ($i = 0; $i < 4; $i++): $item = $b3Gallery[$i] ?? ['src' => '', 'alt' => '']; ?>
+            <div class="row"><label>Фото <?= $i + 1 ?> (путь)</label><input type="text" id="b3_bottom_image_<?= $i + 1 ?>" value="<?= htmlspecialchars($item['src'] ?? '') ?>"></div>
+            <p><small>Или загрузите новое (рекомендуемый размер: 1920×1080 px): <input type="file" id="upload_b3_image_<?= $i + 1 ?>" data-slot="<?= $i + 1 ?>" accept="image/*"> <span id="b3_image_upload_status_<?= $i + 1 ?>"></span></small></p>
+            <div class="row"><label>Alt фото <?= $i + 1 ?></label><input type="text" id="b3_bottom_image_alt_<?= $i + 1 ?>" value="<?= htmlspecialchars($item['alt'] ?? '') ?>"></div>
+            <?php endfor; ?>
+            <h2>Блок 3 — Мобильная галерея</h2>
+            <?php for ($i = 0; $i < 6; $i++): $item = $b3MobileGallery[$i] ?? ['src' => '', 'alt' => '']; ?>
+            <div class="row"><label>Мобильное фото <?= $i + 1 ?> (путь)</label><input type="text" id="b3_mobile_image_<?= $i + 1 ?>" value="<?= htmlspecialchars($item['src'] ?? '') ?>"></div>
+            <p><small>Или загрузите новое (рекомендуемый размер: 1200×1800 px): <input type="file" id="upload_b3_mobile_image_<?= $i + 1 ?>" data-slot="<?= $i + 1 ?>" accept="image/*"> <span id="b3_mobile_image_upload_status_<?= $i + 1 ?>"></span></small></p>
+            <div class="row"><label>Alt мобильного фото <?= $i + 1 ?></label><input type="text" id="b3_mobile_image_alt_<?= $i + 1 ?>" value="<?= htmlspecialchars($item['alt'] ?? '') ?>"></div>
+            <?php endfor; ?>
         </div>
 
         <div class="sec">
             <h2>Блок 4 — Форма</h2>
-            <div class="row"><label>Верхнее фото (путь)</label><input type="text" id="b4_top_image" value="<?= htmlspecialchars($b4['top_image'] ?? '') ?>"></div>
-            <p><small>Или загрузите новое (рекомендуемый размер: 1920×600 px): <input type="file" id="upload_b4_top" accept="image/*"> <span id="b4_top_upload_status"></span></small></p>
-            <div class="row"><label>Alt</label><input type="text" id="b4_top_image_alt" value="<?= htmlspecialchars($b4['top_image_alt'] ?? '') ?>"></div>
             <div class="row"><label>Заголовок</label><input type="text" id="b4_title" value="<?= htmlspecialchars($b4['title'] ?? '') ?>"></div>
             <div class="row"><label>Текст над формой</label><textarea id="b4_form_intro"><?= htmlspecialchars($b4['form_intro'] ?? '') ?></textarea></div>
             <div class="row"><label>Текст кнопки отправки</label><input type="text" id="b4_submit_button_text" value="<?= htmlspecialchars($b4['submit_button_text'] ?? '') ?>"></div>
+            <div class="row"><label>Текст разделяющей полосы</label><input type="text" id="b4_submit_banner_text" value="<?= htmlspecialchars($b4['submit_banner_text'] ?? '') ?>"></div>
         </div>
 
         <div class="sec">
@@ -217,6 +244,7 @@ $projects = $b5['projects'] ?? [];
             <div class="project-item" data-idx="${i}">
                 <strong>Проект ${(proj.id || i + 1)}</strong>
                 <div class="row"><label>Название</label><input type="text" class="proj-title" value="${escapeAttr(proj.title || '')}"></div>
+                <div class="row"><label>Подпись в капсуле</label><input type="text" class="proj-badge-text" value="${escapeAttr(proj.badge_text || proj.title || '')}"></div>
                 <div class="row"><label>Обложка (путь)</label><input type="text" class="proj-cover" value="${escapeAttr(proj.cover || '')}"></div>
                 <p><small>Или загрузите новую обложку (рекомендуемый размер: 800×800 px): <input type="file" class="proj-cover-file" data-idx="${i}" accept="image/*"> <span class="proj-cover-status"></span></small></p>
                 <div class="row"><label>Alt обложки</label><input type="text" class="proj-cover-alt" value="${escapeAttr(proj.cover_alt || '')}"></div>
@@ -231,6 +259,12 @@ $projects = $b5['projects'] ?? [];
             inp.addEventListener('input', function() {
                 const i = parseInt(this.closest('.project-item').dataset.idx, 10);
                 if (projectsData[i]) projectsData[i].title = this.value;
+            });
+        });
+        container.querySelectorAll('.proj-badge-text').forEach(inp => {
+            inp.addEventListener('input', function() {
+                const i = parseInt(this.closest('.project-item').dataset.idx, 10);
+                if (projectsData[i]) projectsData[i].badge_text = this.value;
             });
         });
         container.querySelectorAll('.proj-cover').forEach(inp => {
@@ -369,89 +403,63 @@ $projects = $b5['projects'] ?? [];
         this.value = '';
     });
 
-    document.getElementById('upload_b2_left').addEventListener('change', function() {
+    document.getElementById('upload_b2_image').addEventListener('change', function() {
         if (!this.files.length) return;
         const formData = new FormData();
         formData.append('file', this.files[0]);
-        formData.append('type', 'block2_left');
-        const status = document.getElementById('b2_left_upload_status');
+        formData.append('type', 'block2_image');
+        const status = document.getElementById('b2_image_upload_status');
         status.textContent = 'Загрузка...';
         fetch('upload.php', { method: 'POST', body: formData })
             .then(r => r.json())
             .then(data => {
-                if (data.ok) document.getElementById('b2_left_image').value = data.path;
+                if (data.ok) document.getElementById('b2_image').value = data.path;
                 status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
             })
             .catch(() => { status.textContent = 'Ошибка'; });
         this.value = '';
     });
 
-    document.getElementById('upload_b2_right').addEventListener('change', function() {
-        if (!this.files.length) return;
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-        formData.append('type', 'block2_right');
-        const status = document.getElementById('b2_right_upload_status');
-        status.textContent = 'Загрузка...';
-        fetch('upload.php', { method: 'POST', body: formData })
-            .then(r => r.json())
-            .then(data => {
-                if (data.ok) document.getElementById('b2_right_image').value = data.path;
-                status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
-            })
-            .catch(() => { status.textContent = 'Ошибка'; });
-        this.value = '';
+    document.querySelectorAll('input[id^="upload_b3_image_"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            if (!this.files.length) return;
+            const slot = this.dataset.slot;
+            const formData = new FormData();
+            formData.append('file', this.files[0]);
+            formData.append('type', 'block3_image');
+            formData.append('slot', slot);
+            const status = document.getElementById(`b3_image_upload_status_${slot}`);
+            status.textContent = 'Загрузка...';
+            fetch('upload.php', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok) document.getElementById(`b3_bottom_image_${slot}`).value = data.path;
+                    status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
+                })
+                .catch(() => { status.textContent = 'Ошибка'; });
+            this.value = '';
+        });
     });
 
-    document.getElementById('upload_b3_bottom1').addEventListener('change', function() {
-        if (!this.files.length) return;
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-        formData.append('type', 'block3_bottom1');
-        const status = document.getElementById('b3_bottom1_upload_status');
-        status.textContent = 'Загрузка...';
-        fetch('upload.php', { method: 'POST', body: formData })
-            .then(r => r.json())
-            .then(data => {
-                if (data.ok) document.getElementById('b3_bottom_image1').value = data.path;
-                status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
-            })
-            .catch(() => { status.textContent = 'Ошибка'; });
-        this.value = '';
-    });
-
-    document.getElementById('upload_b3_bottom2').addEventListener('change', function() {
-        if (!this.files.length) return;
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-        formData.append('type', 'block3_bottom2');
-        const status = document.getElementById('b3_bottom2_upload_status');
-        status.textContent = 'Загрузка...';
-        fetch('upload.php', { method: 'POST', body: formData })
-            .then(r => r.json())
-            .then(data => {
-                if (data.ok) document.getElementById('b3_bottom_image2').value = data.path;
-                status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
-            })
-            .catch(() => { status.textContent = 'Ошибка'; });
-        this.value = '';
-    });
-
-    document.getElementById('upload_b4_top').addEventListener('change', function() {
-        if (!this.files.length) return;
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-        formData.append('type', 'block4_top');
-        const status = document.getElementById('b4_top_upload_status');
-        status.textContent = 'Загрузка...';
-        fetch('upload.php', { method: 'POST', body: formData })
-            .then(r => r.json())
-            .then(data => {
-                if (data.ok) document.getElementById('b4_top_image').value = data.path;
-                status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
-            })
-            .catch(() => { status.textContent = 'Ошибка'; });
-        this.value = '';
+    document.querySelectorAll('input[id^="upload_b3_mobile_image_"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            if (!this.files.length) return;
+            const slot = this.dataset.slot;
+            const formData = new FormData();
+            formData.append('file', this.files[0]);
+            formData.append('type', 'block3_mobile_image');
+            formData.append('slot', slot);
+            const status = document.getElementById(`b3_mobile_image_upload_status_${slot}`);
+            status.textContent = 'Загрузка...';
+            fetch('upload.php', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok) document.getElementById(`b3_mobile_image_${slot}`).value = data.path;
+                    status.textContent = data.ok ? 'Загружено' : (data.error || 'Ошибка');
+                })
+                .catch(() => { status.textContent = 'Ошибка'; });
+            this.value = '';
+        });
     });
 
     document.getElementById('add_project_btn').addEventListener('click', function() {
@@ -459,6 +467,7 @@ $projects = $b5['projects'] ?? [];
         projectsData.push({
             id: newId,
             title: 'Новый проект',
+            badge_text: 'Новый проект',
             cover: '',
             cover_alt: '',
             gallery: []
@@ -470,6 +479,24 @@ $projects = $b5['projects'] ?? [];
         e.preventDefault();
         const workflowStr = document.getElementById('b3_workflow_steps').value;
         const workflow_steps = workflowStr ? workflowStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+        const block3Gallery = [1, 2, 3, 4].map(function(slot) {
+            return {
+                src: document.getElementById(`b3_bottom_image_${slot}`).value,
+                alt: document.getElementById(`b3_bottom_image_alt_${slot}`).value
+            };
+        }).filter(function(item) {
+            return item.src || item.alt;
+        });
+
+        const block3MobileGallery = [1, 2, 3, 4, 5, 6].map(function(slot) {
+            return {
+                src: document.getElementById(`b3_mobile_image_${slot}`).value,
+                alt: document.getElementById(`b3_mobile_image_alt_${slot}`).value
+            };
+        }).filter(function(item) {
+            return item.src || item.alt;
+        });
 
         const content = {
             seo: {
@@ -503,27 +530,22 @@ $projects = $b5['projects'] ?? [];
                 text1: document.getElementById('b2_text1').value,
                 text2: document.getElementById('b2_text2').value,
                 text3: document.getElementById('b2_text3').value,
-                left_image: document.getElementById('b2_left_image').value,
-                left_image_alt: document.getElementById('b2_left_image_alt').value,
-                right_image: document.getElementById('b2_right_image').value,
-                right_image_alt: document.getElementById('b2_right_image_alt').value
+                image: document.getElementById('b2_image').value,
+                image_alt: document.getElementById('b2_image_alt').value
             },
             carousel: carouselData,
             block3: {
                 title: document.getElementById('b3_title').value,
                 subtitle: document.getElementById('b3_subtitle').value,
                 workflow_steps: workflow_steps,
-                bottom_image1: document.getElementById('b3_bottom_image1').value,
-                bottom_image1_alt: document.getElementById('b3_bottom_image1_alt').value,
-                bottom_image2: document.getElementById('b3_bottom_image2').value,
-                bottom_image2_alt: document.getElementById('b3_bottom_image2_alt').value
+                bottom_gallery: block3Gallery,
+                bottom_gallery_mobile: block3MobileGallery
             },
             block4: {
-                top_image: document.getElementById('b4_top_image').value,
-                top_image_alt: document.getElementById('b4_top_image_alt').value,
                 title: document.getElementById('b4_title').value,
                 form_intro: document.getElementById('b4_form_intro').value,
-                submit_button_text: document.getElementById('b4_submit_button_text').value
+                submit_button_text: document.getElementById('b4_submit_button_text').value,
+                submit_banner_text: document.getElementById('b4_submit_banner_text').value
             },
             block5: {
                 title: document.getElementById('b5_title').value,

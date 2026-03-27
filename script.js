@@ -1,50 +1,25 @@
-// ============================================
-// TELEGRAM BOT CONFIGURATION
-// ============================================
-const BOT_TOKEN = 'ваш токен';
-const CHAT_ID = 'ваш chat id'; // Замените на ваш Chat ID (получить можно командой /start боту @userinfobot)
+async function sendLeadRequest(formData) {
+    const response = await fetch('send-request.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    });
 
-// Функция отправки сообщения в Telegram
-async function sendToTelegram(formData) {
-    const commentSection = formData.comments ? `<b>💬 Комментарий:</b>\n${formData.comments}\n\n` : '';
-    const message = `<b>📋 Новая заявка с сайта ostorozhno-detali.ru</b>
-
-<b>📱 Телефон:</b> ${formData.phone}
-<b>📅 Дата мероприятия:</b> ${formData.eventDate}
-<b>📧 Email:</b> ${formData.email}
-<b>💰 Бюджет:</b> ${parseInt(formData.budget).toLocaleString('ru-RU')} ₽
-${commentSection}`;
-    
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-    
+    let responseData = null;
     try {
-        console.log('📤 Отправка в Telegram...', { url, chatId: CHAT_ID });
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'HTML'
-            })
-        });
-        
-        const responseData = await response.json();
-        
-        if (response.ok && responseData.ok) {
-            console.log('✅ Сообщение успешно отправлено в Telegram');
-            return true;
-        } else {
-            console.error('❌ Ошибка Telegram API:', responseData);
-            throw new Error(`Telegram API ошибка: ${responseData.description || 'Неизвестная ошибка'}`);
-        }
+        responseData = await response.json();
     } catch (error) {
-        console.error('❌ Ошибка при отправке в Telegram:', error);
-        throw error;
+        console.error('Не удалось прочитать ответ сервера:', error);
     }
+
+    if (!response.ok || !responseData?.ok) {
+        const errorMessage = responseData?.error || 'Не удалось отправить заявку';
+        throw new Error(errorMessage);
+    }
+
+    return responseData;
 }
 
 // Плавная прокрутка к форме обратной связи
@@ -66,13 +41,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // УПРАВЛЕНИЕ ВИДИМОСТЬЮ НАВИГАЦИОННОЙ ПАНЕЛИ
     // ============================================
     const topNavigation = document.querySelector('.top-navigation');
+    const navToggle = document.querySelector('.nav-toggle');
     const block1 = document.getElementById('block-1');
+    const mobileNavBreakpoint = window.matchMedia('(max-width: 768px)');
     
     // Определяем высоту блока 1
     let block1Height = block1 ? block1.offsetHeight : 0;
+
+    function closeMobileNav() {
+        if (!topNavigation || !navToggle) return;
+        topNavigation.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Открыть меню');
+    }
+
+    function toggleMobileNav() {
+        if (!topNavigation || !navToggle) return;
+        const isOpen = topNavigation.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+    }
     
     // Обработчик прокрутки для управления видимостью навигации
     window.addEventListener('scroll', function() {
+        if (mobileNavBreakpoint.matches) {
+            topNavigation.classList.add('nav-at-top');
+            return;
+        }
+
         const scrollY = window.scrollY;
         
         // Если скролл в пределах первого блока, показываем панель постоянно
@@ -85,9 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Инициальная проверка при загрузке (на случай, если страница открылась с якорем)
-    if (window.scrollY < block1Height) {
+    if (mobileNavBreakpoint.matches || window.scrollY < block1Height) {
         topNavigation.classList.add('nav-at-top');
     }
+
+    if (navToggle) {
+        navToggle.addEventListener('click', function() {
+            toggleMobileNav();
+        });
+    }
+
+    mobileNavBreakpoint.addEventListener('change', function(event) {
+        if (!event.matches) {
+            closeMobileNav();
+        } else {
+            topNavigation.classList.add('nav-at-top');
+        }
+    });
     
     // ============================================
     // ПЛАВНАЯ ПРОКРУТКА ДЛЯ НАВИГАЦИИ
@@ -106,7 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     block: 'start'
                 });
             }
+
+            if (mobileNavBreakpoint.matches) {
+                closeMobileNav();
+            }
         });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeMobileNav();
+        }
     });
 
     // ============================================
@@ -506,15 +526,14 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Данные формы:', formData);
             
             try {
-                // Отправка в Telegram
-                await sendToTelegram(formData);
+                await sendLeadRequest(formData);
                 
                 alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
                 
                 // Очистка формы
                 mainForm.reset();
             } catch (error) {
-                alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
+                alert(`Произошла ошибка при отправке: ${error.message}`);
                 console.error('Ошибка отправки формы:', error);
             } finally {
                 // Восстанавливаем кнопку
@@ -543,6 +562,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProject = null;
     let currentImageIndex = 0;
     let projectImages = [];
+
+    function lockBodyScroll() {
+        document.body.style.overflow = 'hidden';
+    }
+
+    function unlockBodyScroll() {
+        document.body.style.overflow = '';
+    }
+
+    function resetProjectGalleryScroll() {
+        if (!galleryModal || !galleryGridView) return;
+        galleryModal.scrollTop = 0;
+        galleryGridView.scrollTop = 0;
+    }
     
     function initProjectGallery() {
         const grid = document.querySelector('.projects-grid');
@@ -560,10 +593,94 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             showGalleryGrid();
             galleryModal.classList.add('active');
+            lockBodyScroll();
+            resetProjectGalleryScroll();
+            requestAnimationFrame(function() {
+                resetProjectGalleryScroll();
+                setTimeout(resetProjectGalleryScroll, 0);
+                setTimeout(resetProjectGalleryScroll, 120);
+            });
         });
     }
     
     document.addEventListener('contentReady', initProjectGallery);
+
+    // ============================================
+    // ГАЛЕРЕЯ 3 БЛОКА
+    // ============================================
+
+    const block3Gallery = document.querySelector('.block-3-bottom-gallery');
+    const block3Track = document.querySelector('.block-3-bottom-track');
+    const block3Prev = document.querySelector('.block-3-gallery-prev');
+    const block3Next = document.querySelector('.block-3-gallery-next');
+    const block3Counter = document.querySelector('.block-3-gallery-counter');
+    let currentBlock3Slide = 0;
+
+    function updateBlock3Gallery() {
+        if (!block3Track) return;
+        const total = parseInt(block3Track.getAttribute('data-total') || '0', 10);
+        if (!total) return;
+
+        if (currentBlock3Slide < 0) currentBlock3Slide = total - 1;
+        if (currentBlock3Slide >= total) currentBlock3Slide = 0;
+
+        block3Track.style.transform = `translateX(-${currentBlock3Slide * 100}%)`;
+        block3Track.setAttribute('data-index', String(currentBlock3Slide));
+        if (block3Counter) {
+            block3Counter.textContent = `${currentBlock3Slide + 1} / ${total}`;
+        }
+    }
+
+    function changeBlock3Slide(step) {
+        if (!block3Track) return;
+        currentBlock3Slide += step;
+        updateBlock3Gallery();
+    }
+
+    if (block3Prev) {
+        block3Prev.addEventListener('click', function() {
+            changeBlock3Slide(-1);
+        });
+    }
+
+    if (block3Next) {
+        block3Next.addEventListener('click', function() {
+            changeBlock3Slide(1);
+        });
+    }
+
+    document.addEventListener('contentReady', function() {
+        currentBlock3Slide = 0;
+        updateBlock3Gallery();
+    });
+
+    document.addEventListener('block3GalleryReady', function() {
+        currentBlock3Slide = 0;
+        updateBlock3Gallery();
+    });
+
+    if (block3Gallery) {
+        let startX = 0;
+        let deltaX = 0;
+
+        block3Gallery.addEventListener('touchstart', function(e) {
+            startX = e.changedTouches[0].clientX;
+            deltaX = 0;
+        }, { passive: true });
+
+        block3Gallery.addEventListener('touchmove', function(e) {
+            deltaX = e.changedTouches[0].clientX - startX;
+        }, { passive: true });
+
+        block3Gallery.addEventListener('touchend', function() {
+            if (Math.abs(deltaX) < 40) return;
+            if (deltaX < 0) {
+                changeBlock3Slide(1);
+            } else {
+                changeBlock3Slide(-1);
+            }
+        }, { passive: true });
+    }
     
     // Показать сетку фотографий
     function showGalleryGrid() {
@@ -581,6 +698,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         galleryGridView.style.display = 'block';
         galleryFullscreenView.style.display = 'none';
+        resetProjectGalleryScroll();
+        requestAnimationFrame(function() {
+            resetProjectGalleryScroll();
+        });
     }
     
     // Показать полноэкранный просмотр
@@ -618,6 +739,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Закрытие галереи
     galleryClose.addEventListener('click', function() {
         galleryModal.classList.remove('active');
+        unlockBodyScroll();
         projectImages = [];
         currentProject = null;
         galleryGrid.innerHTML = '';
@@ -627,6 +749,7 @@ document.addEventListener('DOMContentLoaded', function() {
     galleryModal.addEventListener('click', function(e) {
         if (e.target === galleryModal) {
             galleryModal.classList.remove('active');
+            unlockBodyScroll();
             projectImages = [];
             currentProject = null;
         }
@@ -641,6 +764,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 galleryPrev.click();
             } else if (e.key === 'Escape') {
                 galleryClose.click();
+            }
+        }
+
+        if (!galleryModal.classList.contains('active') && block3Gallery && block3Track && block3Gallery.matches(':hover')) {
+            if (e.key === 'ArrowRight') {
+                changeBlock3Slide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeBlock3Slide(-1);
             }
         }
     });

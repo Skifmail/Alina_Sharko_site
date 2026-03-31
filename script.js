@@ -38,15 +38,11 @@ function scrollToForm() {
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
-    // УПРАВЛЕНИЕ ВИДИМОСТЬЮ НАВИГАЦИОННОЙ ПАНЕЛИ
+    // УПРАВЛЕНИЕ НАВИГАЦИОННОЙ ПАНЕЛЬЮ
     // ============================================
     const topNavigation = document.querySelector('.top-navigation');
     const navToggle = document.querySelector('.nav-toggle');
-    const block1 = document.getElementById('block-1');
     const mobileNavBreakpoint = window.matchMedia('(max-width: 768px)');
-    
-    // Определяем высоту блока 1
-    let block1Height = block1 ? block1.offsetHeight : 0;
 
     function closeMobileNav() {
         if (!topNavigation || !navToggle) return;
@@ -62,26 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
     }
     
-    // Обработчик прокрутки для управления видимостью навигации
-    window.addEventListener('scroll', function() {
-        if (mobileNavBreakpoint.matches) {
-            topNavigation.classList.add('nav-at-top');
-            return;
-        }
-
-        const scrollY = window.scrollY;
-        
-        // Если скролл в пределах первого блока, показываем панель постоянно
-        if (scrollY < block1Height) {
-            topNavigation.classList.add('nav-at-top');
-        } else {
-            // Если скролл прошёл первый блок, скрываем панель (показывается только при hover)
-            topNavigation.classList.remove('nav-at-top');
-        }
-    });
-    
-    // Инициальная проверка при загрузке (на случай, если страница открылась с якорем)
-    if (mobileNavBreakpoint.matches || window.scrollY < block1Height) {
+    // Панель всегда видимая и закреплена сверху.
+    if (topNavigation) {
         topNavigation.classList.add('nav-at-top');
     }
 
@@ -94,15 +72,57 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileNavBreakpoint.addEventListener('change', function(event) {
         if (!event.matches) {
             closeMobileNav();
-        } else {
-            topNavigation.classList.add('nav-at-top');
         }
     });
     
     // ============================================
-    // ПЛАВНАЯ ПРОКРУТКА ДЛЯ НАВИГАЦИИ
+    // ПЛАВНАЯ ПРОКРУТКА И АКТИВНЫЙ РАЗДЕЛ В НАВИГАЦИИ
     // ============================================
     const navLinks = document.querySelectorAll('.nav-btn');
+    const sections = [];
+
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (!targetId || !targetId.startsWith('#')) return;
+
+        const targetSection = document.querySelector(targetId);
+        if (!targetSection) return;
+
+        sections.push(targetSection);
+    });
+
+    function setActiveNavButton(sectionId) {
+        navLinks.forEach(link => {
+            link.classList.toggle('nav-btn-active', link.getAttribute('href') === `#${sectionId}`);
+        });
+    }
+
+    function updateActiveSection() {
+        if (!sections.length) return;
+
+        const navHeight = topNavigation ? topNavigation.offsetHeight : 0;
+        const scrollPosition = window.scrollY + navHeight + 1;
+
+        let activeSection = sections[0];
+
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const rect = section.getBoundingClientRect();
+            const top = window.scrollY + rect.top;
+            const bottom = top + section.offsetHeight;
+
+            if (scrollPosition >= top && scrollPosition < bottom) {
+                activeSection = section;
+                break;
+            }
+        }
+
+        setActiveNavButton(activeSection.id);
+    }
+
+    if (sections.length > 0) {
+        updateActiveSection();
+    }
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -122,6 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    window.addEventListener('scroll', updateActiveSection);
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {

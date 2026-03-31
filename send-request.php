@@ -7,8 +7,14 @@ function env_value(string $name, string $default = ''): string
 {
     $value = getenv($name);
     if ($value === false || $value === null) {
+        // Some hosting setups populate values in $_SERVER/$_ENV when using SetEnv in .htaccess.
+        $value = $_SERVER[$name] ?? ($_ENV[$name] ?? null);
+    }
+
+    if ($value === false || $value === null) {
         return $default;
     }
+
     return (string)$value;
 }
 

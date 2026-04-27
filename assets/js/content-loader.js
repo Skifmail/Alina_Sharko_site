@@ -162,14 +162,40 @@
         if (data.block3 && data.block3.workflow_steps && data.block3.workflow_steps.length) {
             var workflowEl = document.querySelector('.block-3-workflow');
             if (workflowEl) {
-                var parts = [];
-                data.block3.workflow_steps.forEach(function(step, i) {
-                    parts.push('<span class="workflow-step">' + escapeHtml(step) + '</span>');
-                    if (i < data.block3.workflow_steps.length - 1) {
-                        parts.push('<span class="workflow-arrow">→</span>');
+                var steps = data.block3.workflow_steps.slice();
+                var rows = [];
+
+                if (steps.length >= 7) {
+                    var isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+
+                    if (isMobileViewport) {
+                        // Мобильная раскладка: 2-3-2
+                        rows = [
+                            [steps[0], steps[1]],
+                            [steps[2], steps[3], steps[4]],
+                            [steps[5], steps[6]]
+                        ];
+                    } else {
+                        // Десктопная раскладка 2-3-2 как в макете:
+                        // 1) встреча, разработка
+                        // 2) подписание, эскизы, согласование
+                        // 3) подготовка, реализация
+                        rows = [
+                            [steps[0], steps[1]],
+                            [steps[2], steps[3], steps[4]],
+                            [steps[5], steps[6]]
+                        ];
                     }
-                });
-                workflowEl.innerHTML = parts.join('');
+                } else {
+                    // Безопасный fallback для нестандартного количества этапов
+                    rows = [steps];
+                }
+
+                workflowEl.innerHTML = rows.map(function(row) {
+                    return '<div class="workflow-row">' + row.map(function(step) {
+                        return '<span class="workflow-step">' + escapeHtml(step) + '</span>';
+                    }).join('') + '</div>';
+                }).join('');
             }
         }
 

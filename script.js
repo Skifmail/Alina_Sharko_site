@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     const topNavigation = document.querySelector('.top-navigation');
     const navToggle = document.querySelector('.nav-toggle');
+    const topBar = document.querySelector('.top-bar');
+    const firstBlock = document.getElementById('block-1');
     const mobileNavBreakpoint = window.matchMedia('(max-width: 768px)');
 
     function closeMobileNav() {
@@ -73,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!event.matches) {
             closeMobileNav();
         }
+        updateTopBarVisibility();
     });
     
     // ============================================
@@ -144,6 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     window.addEventListener('scroll', updateActiveSection);
+
+    function updateTopBarVisibility() {
+        if (!topBar || !firstBlock) return;
+
+        if (mobileNavBreakpoint.matches) {
+            topBar.classList.remove('top-bar-hidden');
+            return;
+        }
+
+        const navHeight = topNavigation ? topNavigation.offsetHeight : 0;
+        const blockBottom = firstBlock.getBoundingClientRect().bottom;
+        const shouldHideTopBar = blockBottom <= navHeight;
+
+        topBar.classList.toggle('top-bar-hidden', shouldHideTopBar);
+    }
+
+    requestAnimationFrame(updateTopBarVisibility);
+    window.addEventListener('scroll', updateTopBarVisibility, { passive: true });
+    window.addEventListener('resize', updateTopBarVisibility);
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -605,6 +627,10 @@ document.addEventListener('DOMContentLoaded', function() {
         grid.addEventListener('click', function(e) {
             const item = e.target.closest('.project-item');
             if (!item) return;
+            const coverImage = item.querySelector('.project-cover');
+            if (coverImage && coverImage.dataset.defaultSrc) {
+                coverImage.src = coverImage.dataset.defaultSrc;
+            }
             currentProject = item.getAttribute('data-project');
             const projects = window.__contentProjects;
             if (projects && Array.isArray(projects)) {
@@ -624,8 +650,80 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    function initProjectCoverHover() {
+        const grid = document.querySelector('.projects-grid');
+        if (!grid) return;
+
+        const projects = Array.isArray(window.__contentProjects) ? window.__contentProjects : [];
+        const items = grid.querySelectorAll('.project-item');
+
+        function swapCoverSmooth(image, nextSrc) {
+            if (!image || !nextSrc) return;
+            const currentSrc = image.getAttribute('src') || '';
+            if (currentSrc === nextSrc) return;
+
+            if (image.__coverSwapTimer) {
+                clearTimeout(image.__coverSwapTimer);
+            }
+
+            image.classList.add('project-cover-fade');
+            image.__coverSwapTimer = setTimeout(function() {
+                image.src = nextSrc;
+                image.__coverSwapTimer = setTimeout(function() {
+                    image.classList.remove('project-cover-fade');
+                    image.__coverSwapTimer = null;
+                }, 25);
+            }, 120);
+        }
+
+        items.forEach(function(item) {
+            if (item.dataset.hoverBound === '1') return;
+
+            const image = item.querySelector('.project-cover');
+            if (!image) return;
+
+            const projectId = item.getAttribute('data-project');
+            const project = projects.find(p => String(p.id) === String(projectId));
+            const gallery = project && Array.isArray(project.gallery) ? project.gallery : [];
+
+            const defaultSrc = image.getAttribute('src') || '';
+            const hoverCandidates = [1, 2, 0, 3, 4, 5, 6, 7, 8, 9];
+            const hoverSrc = hoverCandidates
+                .map(index => gallery[index])
+                .find(src => Boolean(src)) || defaultSrc;
+
+            image.dataset.defaultSrc = defaultSrc;
+            image.dataset.hoverSrc = hoverSrc;
+            item.dataset.hoverBound = '1';
+
+            if (!hoverSrc || hoverSrc === defaultSrc) return;
+
+            const preloadHoverImage = new Image();
+            preloadHoverImage.src = hoverSrc;
+
+            item.addEventListener('mouseenter', function() {
+                swapCoverSmooth(image, hoverSrc);
+            });
+
+            item.addEventListener('mouseleave', function() {
+                swapCoverSmooth(image, defaultSrc);
+            });
+
+            item.addEventListener('focusin', function() {
+                swapCoverSmooth(image, hoverSrc);
+            });
+
+            item.addEventListener('focusout', function(event) {
+                if (!item.contains(event.relatedTarget)) {
+                    swapCoverSmooth(image, defaultSrc);
+                }
+            });
+        });
+    }
     
     document.addEventListener('contentReady', initProjectGallery);
+    document.addEventListener('contentReady', initProjectCoverHover);
 
     // ============================================
     // ГАЛЕРЕЯ 3 БЛОКА

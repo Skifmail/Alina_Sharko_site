@@ -62,11 +62,19 @@ $projects = $b5['projects'] ?? [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель</title>
     <style>
+        @font-face {
+            font-family: 'Tilda Sans';
+            src: url('../fonts/TildaSans-VF.ttf') format('truetype-variations');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * { box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #1a1a1a; color: #eee; margin: 0; padding: 20px; }
         a { color: #b30000; }
-        h1 { color: #b30000; }
-        h2 { margin-top: 2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #444; font-size: 1.1rem; }
+        h1 { font-family: 'Tilda Sans', Arial, sans-serif; color: #b30000; }
+        h2 { font-family: 'Tilda Sans', Arial, sans-serif; margin-top: 2rem; padding-bottom: 0.5rem; border-bottom: 1px solid #444; font-size: 1.1rem; }
         .msg { padding: 10px; margin-bottom: 1rem; border-radius: 6px; }
         .msg.ok { background: #1a3d1a; }
         .msg.err { background: #5d1a1a; }

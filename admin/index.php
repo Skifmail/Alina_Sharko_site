@@ -13,10 +13,18 @@ $error = isset($_GET['error']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход в админ-панель</title>
     <style>
+        @font-face {
+            font-family: 'Tilda Sans';
+            src: url('../fonts/TildaSans-VF.ttf') format('truetype-variations');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * { box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; }
         .box { background: #2d2d2d; padding: 2rem; border-radius: 12px; border: 1px solid #b30000; width: 100%; max-width: 360px; }
-        h1 { margin: 0 0 1.5rem; font-size: 1.25rem; color: #b30000; }
+        h1 { font-family: 'Tilda Sans', Arial, sans-serif; margin: 0 0 1.5rem; font-size: 1.25rem; color: #b30000; }
         label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
         input[type="text"], input[type="password"] { width: 100%; padding: 10px 12px; margin-bottom: 1rem; border: 1px solid #555; border-radius: 6px; background: #1a1a1a; color: #fff; }
         button { width: 100%; padding: 12px; background: #b30000; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }

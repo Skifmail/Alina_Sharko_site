@@ -9,8 +9,10 @@
     <meta name="description"
         content="Студия декора Алины Шарко - профессиональное оформление мероприятий.">
     <meta name="keywords"
-        content="декор мероприятий, оформление свадеб, студия декора, декор праздников, Алина Шарко, event декор">
+        content="осторожно детали, декор, сайт, коломна, москва, декор мероприятий, оформление свадеб, студия декора, декор праздников, Алина Шарко, event декор">
     <meta name="author" content="Алина Шарко">
+    <meta name="application-name" content="Осторожно!!! Детали!!!">
+    <meta name="apple-mobile-web-app-title" content="Осторожно!!! Детали!!!">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="yandex" content="index, follow">
@@ -18,17 +20,17 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ostorozhno-detali.ru/">
-    <meta property="og:title" content="Студия Декора Алины Шарко - Профессиональное Оформление Мероприятий">
+    <meta property="og:title" content="Осторожно!!! Детали!!!">
     <meta property="og:description"
         content="Эксклюзивное оформление мероприятий. Превратим ваше торжество в незабываемое событие.">
     <meta property="og:image" content="https://ostorozhno-detali.ru/images/og-image.jpg">
     <meta property="og:locale" content="ru_RU">
-    <meta property="og:site_name" content="Студия Декора Алины Шарко">
+    <meta property="og:site_name" content="Осторожно!!! Детали!!!">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://ostorozhno-detali.ru/">
-    <meta name="twitter:title" content="Студия Декора Алины Шарко">
+    <meta name="twitter:title" content="Осторожно!!! Детали!!!">
     <meta name="twitter:description" content="Профессиональное оформление мероприятий">
     <meta name="twitter:image" content="https://ostorozhno-detali.ru/images/og-image.jpg">
 
@@ -39,7 +41,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <title data-content="seo.title">Студия Декора Алины Шарко | Оформление мероприятий</title>
+    <title data-content="seo.title">Осторожно!!! Детали!!!</title>
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +98,7 @@
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "name": "Студия Декора Алины Шарко",
+        "name": "Осторожно!!! Детали!!!",
         "description": "Профессиональное оформление мероприятий",
         "url": "https://ostorozhno-detali.ru",
         "telephone": "+7-XXX-XXX-XX-XX",
@@ -113,6 +115,15 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://ostorozhno-detali.ru/",
+        "name": "Осторожно!!! Детали!!!",
+        "alternateName": "Осторожно Детали"
+    }
+    </script>
 </head>
 
 <body>
@@ -121,6 +132,7 @@
 
     <!-- Навигационная панель -->
     <nav class="top-navigation">
+        <img src="images/bokal.png" alt="Бокал" class="nav-corner-logo">
         <img src="images/venzel.png" alt="" class="nav-ornament nav-ornament-left">
         <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-navigation-links">
             <span></span>
@@ -207,19 +219,19 @@
             <h2 class="block-3-title" data-content="block3.title"><span class="title-word-italic">ЭТАПЫ</span> <span class="title-word-regular">РАБОТЫ</span></h2>
             <p class="block-3-subtitle" data-content="block3.subtitle">Мы делаем всё - от консультации до монтажа. Вам - только наслаждаться праздником!</p>
             <div class="block-3-workflow">
-                <span class="workflow-step">ВСТРЕЧА/ЗНАКОМСТВО</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">РАЗРАБОТКА КОНЦЕПЦИИ</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">ПОДПИСАНИЕ ДОГОВОРА</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">ЭСКИЗЫ</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">СОГЛАСОВАНИЕ СМЕТЫ</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">ПОДГОТОВКА ПРОЕКТА</span>
-                <span class="workflow-arrow">→</span>
-                <span class="workflow-step">РЕАЛИЗАЦИЯ</span>
+                <div class="workflow-row">
+                    <span class="workflow-step">встреча/знакомство</span>
+                    <span class="workflow-step">разработка концепции</span>
+                </div>
+                <div class="workflow-row">
+                    <span class="workflow-step">подписание договора</span>
+                    <span class="workflow-step">эскизы</span>
+                    <span class="workflow-step">согласование сметы</span>
+                </div>
+                <div class="workflow-row">
+                    <span class="workflow-step">подготовка проекта</span>
+                    <span class="workflow-step">реализация</span>
+                </div>
             </div>
         </div>
 
@@ -284,7 +296,7 @@
                         <label for="eventDate">Дата мероприятия</label>
                         <div class="date-input-wrapper">
                             <input type="text" id="eventDate" name="eventDate" placeholder="ДД.ММ.ГГГГ" required>
-                            <span class="calendar-icon">📅</span>
+                            <span class="calendar-icon" aria-hidden="true">📅</span>
                         </div>
                     </div>
                 </div>
